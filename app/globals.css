@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-display: block;
+  font-family: Mori;
+  font-style: normal;
+  font-weight: 600;
+  src: url(https://assets.codepen.io/16327/PPMori-Regular.woff) format("woff");
+}
+
 :root {
   --background: 0 0% 3.9%;
   --foreground: 0 0% 98%;
@@ -28,6 +36,7 @@
 body {
   background-color: black;
   color: #e0e0e0;
+  font-family: "Mori", Arial, sans-serif;
 }
 
 /* Custom scrollbar */
@@ -89,4 +98,30 @@ html {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* Scramble Text Styles */
+.text-scramble__content {
+  font-size: 15vw;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  width: 100%;
+  text-align: center;
+  color: #dfdcff;
+  margin-top: 0;
+  word-break: break-all;
+}
+
+.text-scramble__text {
+}
+
+.text-scramble__text span {
+  word-break: break-word;
+}
+
+.text-scramble__text img {
+  display: inline-block;
+  height: 0.9em;
+  width: auto;
 }

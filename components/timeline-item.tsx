@@ -6,6 +6,7 @@ import { useState } from "react"
 import { ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import type { ReactNode } from "react"
+import { BaseCard } from "@/components/ui/base-card"
 
 interface TimelineItemProps {
   date: string
@@ -51,12 +52,14 @@ export function TimelineItem({
       {/* Content */}
       <motion.div
         className={cn("ml-16 md:ml-0 md:w-1/2 mb-12", isLeft ? "md:pr-12" : "md:pl-12")}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, x: isLeft ? 50 : -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <div className="relative group bg-black border border-gray-800 rounded-lg p-6 hover:border-gray-700 transition-colors">
+        <BaseCard
+          className="relative group"
+        >
           {/* Content remains the same */}
           <div className="flex items-start justify-between mb-4">
             <div>
@@ -85,7 +88,6 @@ export function TimelineItem({
                 <h4 className="text-sm font-semibold text-gray-300 mb-2">Key Achievements</h4>
                 <ul className="list-disc pl-5 space-y-1 text-gray-400">
                   {achievements.map((achievement, index) => {
-                    // Extract the first word (verb) and make it bold
                     const words = achievement.split(" ")
                     const firstWord = words[0]
                     const restOfSentence = words.slice(1).join(" ")
@@ -126,7 +128,7 @@ export function TimelineItem({
 
           {/* Add gradient overlay that appears on hover */}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-lg"></div>
-        </div>
+        </BaseCard>
       </motion.div>
     </div>
   )

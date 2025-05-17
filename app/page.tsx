@@ -5,8 +5,7 @@ import { ExperienceSection } from "@/components/experience-section"
 import { EducationSection } from "@/components/education-section"
 import { CertificationsSection } from "@/components/certifications-section"
 import { WhatCanIDoSection } from "@/components/what-can-i-do-section"
-import { ContactLinks } from "@/components/contact-links"
-import { SocialLinks } from "@/components/social-links"
+import { GetInTouchSection } from "@/components/sections/get-in-touch-section"
 import { AppLayout } from "@/components/templates/app-layout"
 import { SectionLayout } from "@/components/templates/section-layout"
 
@@ -34,17 +33,11 @@ export default function Home() {
       {/* Certifications Section */}
       <CertificationsSection />
 
+      {/* Get In Touch Section */}
+      <GetInTouchSection />
+
       {/* Contact Links */}
-      <SectionLayout id="contact-links">
-        <ContactLinks />
-        <div className="mt-16">
-          <SocialLinks 
-            linkedinUrl="https://www.linkedin.com/in/priyanshu09"
-            githubUrl="https://github.com/kumarpriyanshu09"
-            email="priyanshu@example.com"
-          />
-        </div>
-      </SectionLayout>
+      {/* The entire SectionLayout for contact-links will be removed */}
     </AppLayout>
   )
 }

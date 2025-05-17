@@ -30,7 +30,7 @@ export function WhatCanIDoSection() {
         "From tuning LLMs to wiring up vector databases, I've worked on GenAI projects both academically and hands-on. I keep building, testing, and iterating through each wave of innovation.",
     },
     {
-      videoSrc: "/video/camp fire.mp4",
+      videoSrc: "/video/flame.mp4",
       title: "Vibe Builder",
       hook: "I build with flow, fun, and fire.",
       description:
@@ -39,7 +39,7 @@ export function WhatCanIDoSection() {
   ]
 
   return (
-    <section className="py-20 px-4 md:px-10 max-w-7xl mx-auto relative">
+    <section id="what-can-i-do" className="py-20 px-4 md:px-10 max-w-7xl mx-auto relative">
       {/* Background pattern */}
       <div className="absolute inset-0 bg-[url('/dots.svg')] bg-repeat opacity-5 pointer-events-none"></div>
 

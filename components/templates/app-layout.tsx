@@ -36,7 +36,7 @@ export function AppLayout({
         {children}
       </main>
       
-      <footer className="py-10 text-center text-gray-500 text-sm border-t border-gray-800">
+      <footer className="py-10 text-center text-gray-500 text-sm">
         <div className="max-w-7xl mx-auto px-4">
           {footerContent || (
             <>

@@ -1,7 +1,7 @@
 ---
 description: 
 globs: 
-alwaysApply: false
+alwaysApply: true
 ---
 # UI Component Development Conventions
 
@@ -30,6 +30,7 @@ This document outlines the conventions to follow when creating or modifying UI c
 
 -   **SVG Icons/Badges**: Components like `[character-icon.tsx](mdc:components/character-icon.tsx)`, `[credly-badge.tsx](mdc:components/credly-badge.tsx)`, `[vercel-badge.tsx](mdc:components/vercel-badge.tsx)` suggest that SVG-based icons or badges are encapsulated within their own components.
 -   **Cards**: There's a pattern of using "Card" components for displaying distinct pieces of information, e.g., `[certificate-card.tsx](mdc:components/certificate-card.tsx)`, `[education-card.tsx](mdc:components/education-card.tsx)`, `[project-card.tsx](mdc:components/project-card.tsx)`, `[skill-card.tsx](mdc:components/skill-card.tsx)`.
+    -   **Standardized Card Appearance**: For new card-like UIs, or when refactoring existing cards, use the `[BaseCard](mdc:components/ui/base-card.tsx)` component located in `components/ui/base-card.tsx`. This component provides consistent styling, hover effects, and entry animations (rounded corners, themed background/border, shadow, lift and scale on hover).
 -   **Sections**: Larger page sections are encapsulated, e.g., `[certifications-section.tsx](mdc:components/certifications-section.tsx)`, `[education-section.tsx](mdc:components/education-section.tsx)`.
 -   **Shadcn/ui**: The presence of `[components/ui](mdc:components/ui)` and the structure of `[tailwind.config.ts](mdc:tailwind.config.ts)` (CSS variables for theming, `tailwindcss-animate`) strongly indicate the use of [shadcn/ui](mdc:https:/ui.shadcn.com). When adding new primitive UI elements, prefer using or adapting components from shadcn/ui.
 

@@ -1,34 +1,34 @@
 "use client"
 
 import { AnimatedText } from "@/components/animated-text"
-import { PDFCertificate } from "@/components/pdf-certificate"
-import { AWSCertificate } from "@/components/aws-certificate"
+import { CertificateCard } from "@/components/certificate-card"
+
+// Commenting out unused imports as they are replaced by CertificateCard
+// import { PDFCertificate } from "@/components/pdf-certificate"
+// import { AWSCertificate } from "@/components/aws-certificate"
 
 export function CertificationsSection() {
   return (
-    <section id="certifications" className="py-20 px-4 md:px-10 max-w-7xl mx-auto">
-      <h2 className="text-5xl md:text-6xl font-bold text-gray-200 tracking-tighter mb-16 text-center">
+    <section id="certifications" className="py-16 sm:py-20 px-4 md:px-8 max-w-7xl mx-auto">
+      <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground tracking-tighter mb-12 sm:mb-16 text-center">
         <AnimatedText text="CERTIFICATIONS" />
       </h2>
 
-      <div className="flex flex-col md:flex-row justify-center items-center gap-8 max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center max-w-4xl mx-auto">
         {/* AWS Certification */}
-        <AWSCertificate
-          name="AWS Certified Cloud Practitioner"
+        <CertificateCard
+          name="AWS Certification"
           organization="Amazon Web Services"
-          date="January 2024"
-          badgeId="cddfea78-db52-4b67-b518-d9f98e7f0d25"
+          badgeImage="/aws-logo.png"
+          pdfLink="/AWS Certified Cloud Practitioner certificate (1).pdf"
         />
 
         {/* Jira Certification */}
-        <PDFCertificate
-          name="Jira Fundamentals"
+        <CertificateCard
+          name="Jira Certification"
           organization="Atlassian"
-          date="February 1, 2024"
-          score="83"
-          completionId="296050523"
-          thumbnailSrc="/jira-certificate-thumbnail.png"
-          pdfSrc="/jira-fundamentals-certificate.pdf"
+          badgeImage="/jira-logo.png"
+          pdfLink="/Jira Fundamentals Badge _ Atlassian.pdf"
         />
       </div>
     </section>

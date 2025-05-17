@@ -9,6 +9,27 @@ import { SectionLayout } from "@/components/templates/section-layout"
 
 const projects: Project[] = [
   {
+    title: "AI DASHBOARD",
+    description: "Interactive Tableau dashboard exploring AI\'s impact on industries, employment, and society. This project showcases data visualization techniques to present complex AI trends clearly.",
+    technologies: ["TABLEAU", "DATA VISUALIZATION", "INTERACTIVE DASHBOARD"],
+    href: "/projects/ai-dashboard",
+    callToAction: "View Project Details"
+  },
+  {
+    title: "BITBOT",
+    description: "AI-Powered Cryptocurrency Guide. BitBot is a chatbot designed to help users understand cryptocurrency in simple terms, leveraging multiple LLMs and RAG for accuracy.",
+    technologies: ["DIFY", "LLM (GEMINI, OPENAI)", "RAG", "WEB SCRAPING", "CHATBOT"],
+    href: "/projects/bitbot",
+    callToAction: "View Project Details"
+  },
+  {
+    title: "HEALTHCARE SALES DASHBOARD",
+    description: "Interactive Excel dashboard analyzing healthcare sales performance against yearly targets. Tracks revenue and covered lives using advanced Excel features for data-driven insights.",
+    technologies: ["EXCEL", "DATA ANALYSIS", "INTERACTIVE DASHBOARD", "BUSINESS INTELLIGENCE"],
+    href: "/projects/healthcare-sales",
+    callToAction: "View Project Details"
+  },
+  {
     title: "STOCK PORTFOLIO OPTIMIZATION",
     description: "Engineered a data-driven stock portfolio optimization framework using Python, Modern Portfolio Theory (MPT), and Monte Carlo simulations to balance risk-return tradeoffs. Leveraged integer programming (Pyomo) to allocate $100k across 9 S&P 500 stocks under constraints. Simulated 1,000 market scenarios to quantify risk and compared rebalancing strategies.",
     technologies: [
