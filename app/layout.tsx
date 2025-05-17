@@ -1,0 +1,32 @@
+import type React from "react"
+import "@/app/globals.css"
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
+import { ThemeProvider } from "@/lib/contexts/theme-context"
+import { ErrorBoundary } from "@/components/error-boundary"
+
+const inter = Inter({ subsets: ["latin"] })
+
+export const metadata: Metadata = {
+  title: "Priyanshu Kumar | Portfolio",
+  description: "Personal portfolio of Priyanshu Kumar, a design-minded developer",
+    generator: 'v0.dev'
+}
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        <ThemeProvider>
+          <ErrorBoundary>
+            {children}
+          </ErrorBoundary>
+        </ThemeProvider>
+      </body>
+    </html>
+  )
+}

@@ -1,0 +1,27 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Project Structure Guide
+
+This document outlines the main directories in this Next.js project and their typical purposes.
+
+*   **`app/`**: Core directory for the Next.js App Router. Contains pages, layouts, API routes, and other application-specific files. ([app/](mdc:app))
+*   **`components/`**: Houses reusable UI components used throughout the application. ([components/](mdc:components))
+*   **`public/`**: Stores static assets like images, fonts, and other files that are served directly. ([public/](mdc:public))
+*   **`styles/`**: Contains global stylesheets, CSS modules, and other styling-related files. ([styles/](mdc:styles))
+*   **`lib/`**: Used for utility functions, helper scripts, and shared library code. ([lib/](mdc:lib))
+*   **`hooks/`**: Custom React hooks for reusable stateful logic are stored here. ([hooks/](mdc:hooks))
+*   **`.next/`**: Next.js build directory. Automatically generated and contains compiled code and build artifacts. You typically don't need to modify this. ([.next/](mdc:.next))
+*   **`.git/`**: Contains Git version control information for the project. ([.git/](mdc:.git))
+*   **`node_modules/`**: Stores all project dependencies installed via the package manager. ([node_modules/](mdc:node_modules))
+*   **`.cursor/`**: Directory used by Cursor for its configuration, including these rules. ([.cursor/](mdc:.cursor))
+
+Key configuration files:
+
+*   **`next.config.mjs`**: Configuration file for Next.js. ([next.config.mjs](mdc:next.config.mjs))
+*   **`tailwind.config.ts`**: Configuration for Tailwind CSS. ([tailwind.config.ts](mdc:tailwind.config.ts))
+*   **`tsconfig.json`**: TypeScript configuration file. ([tsconfig.json](mdc:tsconfig.json))
+*   **`package.json`**: Lists project dependencies and scripts. ([package.json](mdc:package.json))
+*   **`postcss.config.mjs`**: Configuration for PostCSS. ([postcss.config.mjs](mdc:postcss.config.mjs))
