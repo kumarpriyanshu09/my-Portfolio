@@ -38,7 +38,7 @@ export function GetInTouchSection() {
           </p>
           <div className="flex justify-center gap-16 mt-12">
             {CONTACTS.map((contact) => (
-              <Link
+              <a
                 key={contact.label}
                 href={contact.href}
                 target="_blank"
@@ -56,7 +56,7 @@ export function GetInTouchSection() {
                 <span className="text-gray-400 group-hover:text-white transition-colors text-sm font-medium">
                   {contact.label}
                 </span>
-              </Link>
+              </a>
             ))}
             <motion.button
               whileHover={{ scale: 1.1 }}
