@@ -2,17 +2,76 @@
 
 import { AnimatedText } from "@/components/animated-text"
 import { SectionLayout } from "@/components/templates/section-layout"
+import { useRef, useEffect } from "react"
 
 export function AboutSection() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const hasPlayedOnView = useRef(false)
+
+  // Play video fully only the first time About section enters viewport
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return
+
+    const observer = new window.IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasPlayedOnView.current) {
+            if (videoRef.current) {
+              videoRef.current.currentTime = 0
+              videoRef.current.play()
+              hasPlayedOnView.current = true
+            }
+          }
+        })
+      },
+      { threshold: 0.5 }
+    )
+    observer.observe(section)
+    return () => observer.disconnect()
+  }, [])
+
+  // Play on hover (desktop)
+  const handleMouseEnter = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0
+      videoRef.current.play()
+    }
+  }
+
+  // Play on tap (mobile)
+  const handleTouchStart = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0
+      videoRef.current.play()
+    }
+  }
+
   return (
     <SectionLayout id="about">
-      <div className="grid md:grid-cols-2 gap-12 items-center">
-        <div className="relative aspect-square md:aspect-auto md:h-[600px] rounded-lg overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 to-purple-500/10"></div>
-          <div className="absolute inset-0 bg-[url('/placeholder.svg')] bg-cover bg-center opacity-70"></div>
-          <div className="absolute inset-0 bg-black/30"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,100,120,0.1)_0,rgba(0,0,0,0)_70%)]"></div>
-          <div className="absolute inset-0 bg-[url('/dots.svg')] bg-repeat opacity-30"></div>
+      <div ref={sectionRef} className="grid md:grid-cols-2 gap-12 items-center">
+        <div
+          className="w-full max-w-xs md:max-w-sm aspect-[9/16] mx-auto"
+          onMouseEnter={handleMouseEnter}
+          onTouchStart={handleTouchStart}
+        >
+          <video
+            ref={videoRef}
+            src="/video/soy.mp4"
+            className="w-full h-full object-cover bg-black"
+            preload="none"
+            tabIndex={0}
+            title="Intro video"
+            playsInline
+            loop={false}
+            controls={false}
+            aria-label="Intro video"
+            poster="/placeholder.svg"
+            muted
+          >
+            Sorry, your browser does not support embedded videos.
+          </video>
         </div>
         <div className="space-y-6">
           <h2 className="text-5xl md:text-6xl font-bold text-gray-200 tracking-tighter">

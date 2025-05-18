@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
 import { Menu, X } from "lucide-react"
 import { NavLink } from "@/components/atoms/nav-link"
+import ReactDOM from "react-dom"
 
 const navItems = [
   { href: "#about", label: "About" },
@@ -20,6 +21,18 @@ export function MainNavigation() {
   const [activeSection, setActiveSection] = useState<string>("")
   const [scrolled, setScrolled] = useState(false)
 
+  // Handle body scroll lock when menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [mobileMenuOpen])
+
   // Handle scrolling for header styling
   useEffect(() => {
     const handleScroll = () => {
@@ -29,14 +42,13 @@ export function MainNavigation() {
       }
 
       // Determine active section based on scroll position
-      const sections = navItems.map(item => item.href.slice(1)) // Remove the # from href
+      const sections = navItems.map(item => item.href.slice(1))
       
       let currentSection = ""
       for (const section of sections) {
         const element = document.getElementById(section)
         if (element) {
           const rect = element.getBoundingClientRect()
-          // Add some offset to make sure we trigger slightly before reaching the section
           if (rect.top <= 150) {
             currentSection = section
           }
@@ -79,22 +91,56 @@ export function MainNavigation() {
         </button>
       </div>
 
-      {/* Mobile Navigation */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 top-16 z-40 bg-black/95 md:hidden">
-          <nav className="flex flex-col items-center pt-10 space-y-6 text-lg">
+      {/* Mobile Navigation Overlay */}
+      {mobileMenuOpen && typeof window !== "undefined" && ReactDOM.createPortal(
+        <div 
+          className="fixed inset-0 z-[9999] md:hidden"
+          style={{ 
+            position: 'fixed', 
+            top: 0, 
+            right: 0, 
+            bottom: 0, 
+            left: 0, 
+            backgroundColor: 'rgb(0, 0, 0)', // Pure black
+            opacity: 1, // Force full opacity
+            transform: 'translateZ(0)' // Promote to own compositing layer
+          }}
+        >
+          {/* Header */}
+          <div 
+            className="sticky top-0 flex justify-between items-center p-6 border-b border-gray-800"
+            style={{ 
+              backgroundColor: 'rgb(0, 0, 0)', // Pure black for header
+              opacity: 1, // Force full opacity for header
+              transform: 'translateZ(0)' // Promote to own compositing layer
+            }} 
+          >
+            <NavLink href="/" className="text-gray-200 font-bold text-xl">PK</NavLink>
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              aria-label="Close menu"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              <X size={24} />
+            </button>
+          </div>
+
+          {/* Navigation Links */}
+          <nav className="flex flex-col px-6 py-8">
             {navItems.map((item) => (
-              <NavLink 
+              <NavLink
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
                 isActive={activeSection === item.href.slice(1)}
+                className="text-[32px] font-medium text-gray-300 hover:text-white py-3 transition-colors"
               >
                 {item.label}
               </NavLink>
             ))}
           </nav>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   )

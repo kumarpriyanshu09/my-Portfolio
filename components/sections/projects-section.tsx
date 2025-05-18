@@ -98,7 +98,7 @@ const projects: Project[] = [
 export function ProjectsSection() {
   return (
     <SectionLayout id="projects">
-      <div className="flex justify-between items-center mb-16">
+      <div className="mb-16">
         <h2 className="text-5xl md:text-6xl font-bold text-gray-200 tracking-tighter">
           <AnimatedText text="PROJECTS" />
         </h2>
@@ -106,7 +106,7 @@ export function ProjectsSection() {
           href="https://github.com/kumarpriyanshu09"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 text-pink-400 hover:text-pink-300 transition-colors"
+          className="flex items-center gap-2 text-pink-400 hover:text-pink-300 transition-colors mt-4 md:mt-0 md:absolute md:right-0 md:top-0 md:self-end text-base md:text-lg"
         >
           <Github className="h-5 w-5" />
           <span>View All on GitHub</span>
