@@ -25,14 +25,14 @@ export function AppLayout({
   return (
     <div className={cn("relative min-h-screen bg-black text-gray-300 overflow-hidden", className)}>
       {withSpotlight && (
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 -z-10 pointer-events-none">
           <Spotlight className={spotlightPosition} fill="rgba(255, 100, 120, 0.15)" />
         </div>
       )}
       
-      <Header />
+      <Header className="relative z-50" />
       
-      <main className="z-10 pt-24 pb-20">
+      <main className="relative z-10 pt-24 pb-20">
         {children}
       </main>
       

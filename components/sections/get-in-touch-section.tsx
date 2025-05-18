@@ -28,7 +28,7 @@ export function GetInTouchSection() {
 
   return (
     <SectionLayout id="contact">
-      <div className="max-w-3xl mx-auto px-4 py-20">
+      <div className="relative z-20 max-w-3xl mx-auto px-4 py-20">
         <h2 className="text-5xl md:text-6xl font-bold text-center mb-12 text-gray-200 tracking-tighter">
           Get in Touch
         </h2>

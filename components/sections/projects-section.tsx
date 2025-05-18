@@ -98,20 +98,22 @@ const projects: Project[] = [
 export function ProjectsSection() {
   return (
     <SectionLayout id="projects">
-      <div className="mb-16">
-        <h2 className="text-5xl md:text-6xl font-bold text-gray-200 tracking-tighter">
-          <AnimatedText text="PROJECTS" />
-        </h2>
-        <Link
-          href="https://github.com/kumarpriyanshu09"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 text-pink-400 hover:text-pink-300 transition-colors mt-4 md:mt-0 md:absolute md:right-0 md:top-0 md:self-end text-base md:text-lg"
-        >
-          <Github className="h-5 w-5" />
-          <span>View All on GitHub</span>
-          <ExternalLink className="h-4 w-4" />
-        </Link>
+      <div className="mb-16 relative">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+          <h2 className="text-5xl md:text-6xl font-bold text-gray-200 tracking-tighter">
+            <AnimatedText text="PROJECTS" />
+          </h2>
+          <Link
+            href="https://github.com/kumarpriyanshu09"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-pink-400 hover:text-pink-300 transition-colors mt-4 md:mt-0 text-base md:text-lg"
+          >
+            <Github className="h-5 w-5" />
+            <span>View All on GitHub</span>
+            <ExternalLink className="h-4 w-4" />
+          </Link>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
