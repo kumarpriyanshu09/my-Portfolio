@@ -1,0 +1,66 @@
+---
+trigger: always_on
+description: 
+globs: 
+---
+# UI Component Development Conventions
+
+This document outlines the conventions to follow when creating or modifying UI components in this project. Adhering to these guidelines will help maintain consistency and improve collaboration.
+
+## Styling
+
+-   **Tailwind CSS**: Components should primarily be styled using [Tailwind CSS](mdc:https://tailwindcss.com) utility classes. The configuration for Tailwind is located in `[tailwind.config.ts](mdc:tailwind.config.ts)`.
+-   **CSS Variables**: Theme-related values (colors, border radius, etc.) are defined as CSS variables in `[styles/globals.css](mdc:styles/globals.css)`. These variables are then used in the Tailwind configuration.
+    -   Light and dark mode themes are supported and defined using these CSS variables.
+    -   Example: `background: hsl(var(--background))`
+-   **Global Styles**: Base global styles and Tailwind CSS layers (`@tailwind base;`, `@tailwind components;`, `@tailwind utilities;`) are defined in `[styles/globals.css](mdc:styles/globals.css)`.
+-   **Animations**: Custom animations and keyframes are defined in `[tailwind.config.ts](mdc:tailwind.config.ts)` within the `theme.extend.keyframes` and `theme.extend.animation` sections. The project uses `tailwindcss-animate` plugin.
+
+## Component Structure and Naming
+
+-   **File Location**: All reusable UI components are located in the `[components](mdc:components)` directory.
+    -   Atomic Design: The `components` directory contains subdirectories like `atoms`, `molecules`, `organisms`, `templates`, and `layout`, suggesting an Atomic Design methodology. New components should be placed in the appropriate subdirectory.
+    -   Specific UI elements like `[sections](mdc:components/sections)` and `[ui](mdc:components/ui)` also have their own directories.
+-   **File Naming**: Component files should be named using kebab-case (e.g., `animated-text.tsx`, `certificate-card.tsx`).
+-   **Component Naming**: React components themselves should be named using PascalCase (e.g., `AnimatedText`, `CertificateCard`).
+-   **Props**: Define component props clearly using TypeScript interfaces or types.
+-   **Clarity**: Strive for clear and descriptive names for components, props, and variables.
+
+## Specific Component Types
+
+-   **SVG Icons/Badges**: Components like `[character-icon.tsx](mdc:components/character-icon.tsx)`, `[credly-badge.tsx](mdc:components/credly-badge.tsx)`, `[vercel-badge.tsx](mdc:components/vercel-badge.tsx)` suggest that SVG-based icons or badges are encapsulated within their own components.
+-   **Cards**: There's a pattern of using "Card" components for displaying distinct pieces of information, e.g., `[certificate-card.tsx](mdc:components/certificate-card.tsx)`, `[education-card.tsx](mdc:components/education-card.tsx)`, `[project-card.tsx](mdc:components/project-card.tsx)`, `[skill-card.tsx](mdc:components/skill-card.tsx)`.
+    -   **Standardized Card Appearance**: For new card-like UIs, or when refactoring existing cards, use the `[BaseCard](mdc:components/ui/base-card.tsx)` component located in `components/ui/base-card.tsx`. This component provides consistent styling, hover effects, and entry animations (rounded corners, themed background/border, shadow, lift and scale on hover).
+-   **Sections**: Larger page sections are encapsulated, e.g., `[certifications-section.tsx](mdc:components/certifications-section.tsx)`, `[education-section.tsx](mdc:components/education-section.tsx)`.
+-   **Shadcn/ui**: The presence of `[components/ui](mdc:components/ui)` and the structure of `[tailwind.config.ts](mdc:tailwind.config.ts)` (CSS variables for theming, `tailwindcss-animate`) strongly indicate the use of [shadcn/ui](mdc:https://ui.shadcn.com). When adding new primitive UI elements, prefer using or adapting components from shadcn/ui.
+
+## Imports
+
+-   Use relative paths for importing components within the `components` directory.
+-   Organize imports, typically with React/Next.js imports first, then library imports, and finally local component/module imports.
+
+## Accessibility (a11y)
+
+- Use semantic HTML elements where appropriate
+- Ensure all interactive elements are keyboard accessible
+- Provide proper ARIA attributes when needed
+- Ensure sufficient color contrast (minimum 4.5:1 for normal text)
+- Include proper alt text for images
+- Test with screen readers and keyboard navigation
+- Use `prefers-reduced-motion` for animations
+
+## Performance
+
+- Use dynamic imports for large components that aren't needed immediately
+- Optimize images using Next.js `Image` component
+- Implement proper loading states for async components
+- Use React's `useMemo` and `useCallback` for performance optimization when needed
+
+## Documentation
+
+- Document component props using JSDoc comments
+- Include usage examples in the component's story or documentation
+- Document any accessibility considerations
+- Note any known limitations or gotchas
+
+By following these conventions, we can ensure our UI codebase remains clean, consistent, and easy to maintain.
