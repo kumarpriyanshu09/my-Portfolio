@@ -1,6 +1,7 @@
 "use client"
 
 import { ReactNode } from "react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Header } from "@/components/layout/header"
 import { cn } from "@/lib/utils"
 import { Spotlight } from "@/components/ui/spotlight"
@@ -34,6 +35,7 @@ export function AppLayout({
       
       <main className="relative z-10 pt-24 pb-20">
         {children}
+        <SpeedInsights />
       </main>
       
       <footer className="py-10 text-center text-gray-500 text-sm">
