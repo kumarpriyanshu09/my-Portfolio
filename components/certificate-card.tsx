@@ -31,7 +31,7 @@ export function CertificateCard({
       transition={{ duration: 0.3 }}
     >
       {/* Badge Image */}
-      <div className="mb-5 w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center p-2 bg-muted/30 rounded-lg shadow-inner overflow-hidden">
+      <div className="mb-5 w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center p-2 bg-black rounded-lg shadow-inner overflow-hidden">
         <Image
           src={badgeImage}
           alt={`${name} badge`}

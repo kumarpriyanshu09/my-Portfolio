@@ -7,7 +7,7 @@ export function WhatCanIDoSection() {
   const skills = [
     {
       character: "finn" as const,
-      videoSrc: "video/datacube.mp4",
+      videoSrc: "video/stacks.mp4",
       title: "Data + Analytics",
       hook: "I turn chaos into clarity.",
       description:
@@ -15,7 +15,7 @@ export function WhatCanIDoSection() {
     },
     {
       character: "simpson" as const,
-      videoSrc: "/video/cube.mp4",
+      videoSrc: "video/coffeemaker.mp4",
       title: "Creative Systems Thinker",
       hook: "I build systems that lift people.",
       description:
@@ -23,7 +23,7 @@ export function WhatCanIDoSection() {
     },
     {
       character: "rick" as const,
-      videoSrc: "video/Create Video.mp4",
+      videoSrc: "video/rick.mp4",
       title: "GenAI Explorer",
       hook: "I don't just study GenAI—I build with it.",
       description:
