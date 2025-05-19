@@ -5,15 +5,14 @@ import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 interface SkillCardProps {
-  character?: "finn" | "lumpy" | "rick" | "simpson"
-  videoSrc?: string
+  videoSrc: string
   title: string
   hook: string
   description: string
   index: number
 }
 
-export function SkillCard({ character, videoSrc, title, hook, description, index }: SkillCardProps) {
+export function SkillCard({ videoSrc, title, hook, description, index }: SkillCardProps) {
   const [isHovered, setIsHovered] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
 
@@ -42,17 +41,15 @@ export function SkillCard({ character, videoSrc, title, hook, description, index
       onMouseLeave={handleMouseLeave}
       whileHover={{ y: -5, transition: { duration: 0.3 } }}
     >
-      {videoSrc && (
-        <div className="w-full md:w-1/3 aspect-square bg-gray-900 overflow-hidden relative md:rounded-l-lg md:rounded-r-none rounded-t-lg"> 
-          <video
-            ref={videoRef}
-            src={videoSrc}
-            muted
-            playsInline
-            className="w-full h-full object-cover"
-          />
-        </div>
-      )}
+      <div className="w-full md:w-1/3 aspect-square bg-gray-900 overflow-hidden relative md:rounded-l-lg md:rounded-r-none rounded-t-lg"> 
+        <video
+          ref={videoRef}
+          src={videoSrc}
+          muted
+          playsInline
+          className="w-full h-full object-cover"
+        />
+      </div>
 
       <div className={cn(
           "flex-1 p-6 flex flex-col justify-between",

@@ -41,7 +41,7 @@ export function PDFCertificate({
       {/* Certificate Thumbnail */}
       <div className="mb-6 w-full h-48 relative rounded-lg overflow-hidden bg-black/40 flex items-center justify-center">
         <Image
-          src={thumbnailSrc || "/placeholder.svg"}
+          src={thumbnailSrc || "/assets/ui/placeholder.svg"}
           alt={`${name} certificate`}
           width={240}
           height={180}

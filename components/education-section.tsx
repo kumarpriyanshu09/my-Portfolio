@@ -18,7 +18,7 @@ export function EducationSection() {
           date="August 2023 - May 2025"
           location="Hartford, CT"
           gpa="3.76/4.0"
-          logo="/UConn Logo.svg"
+          logo="/assets/education/UConn Logo.svg"
           courses={[
             "Data Mining and Business Intelligence",
             "Predictive Modeling",
@@ -39,7 +39,7 @@ export function EducationSection() {
           date="August 2018 - May 2022"
           location="Pune, India"
           gpa="3.29/4.0"
-          logo="/MIT WPU Logo.svg"
+          logo="/assets/education/MIT WPU Logo.svg"
           courses={[
             "Data Analytics with Python",
             "Machine Learning",

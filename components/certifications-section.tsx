@@ -19,16 +19,16 @@ export function CertificationsSection() {
         <CertificateCard
           name="AWS Certification"
           organization="Amazon Web Services"
-          badgeImage="/aws-logo.png"
-          pdfLink="/AWS Certified Cloud Practitioner certificate (1).pdf"
+          badgeImage="/assets/skills/aws-logo.png"
+          pdfLink="/assets/certificates/AWS Certified Cloud Practitioner certificate (1).pdf"
         />
 
         {/* Jira Certification */}
         <CertificateCard
           name="Jira Certification"
           organization="Atlassian"
-          badgeImage="/jira-logo.png"
-          pdfLink="/Jira Fundamentals Badge _ Atlassian.pdf"
+          badgeImage="/assets/skills/jira-logo.png"
+          pdfLink="/assets/certificates/Jira_Fundamentals_Badge_Atlassian.pdf"
         />
       </div>
     </section>

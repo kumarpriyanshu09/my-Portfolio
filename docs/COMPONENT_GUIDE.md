@@ -11,7 +11,6 @@ The project follows Atomic Design principles with the following component catego
 Basic building blocks of the UI:
 
 - **AnimatedText**: Text with animation effects
-- **CharacterIcon**: Icon components for characters/avatars
 - **ScrambleText**: Text that scrambles and unscrambles
 
 ### 2. Molecules

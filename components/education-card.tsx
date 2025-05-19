@@ -24,7 +24,7 @@ export function EducationCard({
   field,
   date,
   gpa,
-  logo = "/placeholder.svg",
+  logo = "/assets/ui/placeholder.svg",
   location,
   courses = [],
 }: EducationCardProps) {

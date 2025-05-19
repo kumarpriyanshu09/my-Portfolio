@@ -58,7 +58,7 @@ export function AboutSection() {
         >
           <video
             ref={videoRef}
-            src="/video/soy.mp4"
+            src="/videos/soy.mp4"
             className="w-full h-full object-cover bg-black"
             preload="none"
             tabIndex={0}
@@ -67,7 +67,7 @@ export function AboutSection() {
             loop={false}
             controls={false}
             aria-label="Intro video"
-            poster="/placeholder.svg"
+            poster="/assets/ui/placeholder.svg"
             muted
           >
             Sorry, your browser does not support embedded videos.
