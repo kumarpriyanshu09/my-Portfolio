@@ -6,28 +6,28 @@ import { SkillCard } from "@/components/skill-card"
 export function WhatCanIDoSection() {
   const skills = [
     {
-      videoSrc: "/videos/stacks.mp4",
+      videoSrc: "https://7qd5tdgxs26x480g.public.blob.vercel-storage.com/stacks-VlwpyfNhULEfThT72Hneml32CZrDyY.mp4",
       title: "Data + Analytics",
       hook: "I turn chaos into clarity.",
       description:
         "From messy datasets to meaningful dashboards, I build ETL pipelines that matter and surface insights that move the needle. I use SQL, Python, Power BI, and AWS to make decisions easier and data trustworthy.",
     },
     {
-      videoSrc: "/videos/coffeemaker.mp4",
+      videoSrc: "https://7qd5tdgxs26x480g.public.blob.vercel-storage.com/coffeemaker-qInRkNNkG0UBRhJAISMFsVtycehAUE.mp4",
       title: "Creative Systems Thinker",
       hook: "I build systems that lift people.",
       description:
         "I thrive on open communication, diverse perspectives, and structured thinking. Whether I'm breaking things to understand them or simplifying complexity, I care about clarity, efficiency, and people feeling heard.",
     },
     {
-      videoSrc: "/videos/rick.mp4",
+      videoSrc: "https://7qd5tdgxs26x480g.public.blob.vercel-storage.com/rick-XX01LpCUBTF5BbnN7Y5FUWypjKJeOL.mp4",
       title: "GenAI Explorer",
       hook: "I don't just study GenAI—I build with it.",
       description:
         "From tuning LLMs to wiring up vector databases, I've worked on GenAI projects both academically and hands-on. I keep building, testing, and iterating through each wave of innovation.",
     },
     {
-      videoSrc: "/videos/flame.mp4",
+      videoSrc: "https://7qd5tdgxs26x480g.public.blob.vercel-storage.com/flame-RyaSBDXLLcsZasRf0FMQHItX3midr1.mp4",
       title: "Vibe Builder",
       hook: "I build with flow, fun, and fire.",
       description:

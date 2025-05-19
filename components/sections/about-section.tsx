@@ -58,7 +58,7 @@ export function AboutSection() {
         >
           <video
             ref={videoRef}
-            src="/videos/soy.mp4"
+            src="https://7qd5tdgxs26x480g.public.blob.vercel-storage.com/soy-ctWQMpIF5RKt61yILQlITFOvhsMeZp.mp4"
             className="w-full h-full object-cover bg-black"
             preload="none"
             tabIndex={0}
