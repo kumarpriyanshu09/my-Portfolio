@@ -11,7 +11,8 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Priyanshu Kumar | Portfolio",
   description: "Personal portfolio of Priyanshu Kumar, a design-minded developer",
-    generator: 'v0.dev'
+    generator: 'v0.dev',
+  icons: '/assets/ui/favicon.png',
 }
 
 export default function RootLayout({

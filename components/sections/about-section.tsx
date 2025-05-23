@@ -78,17 +78,9 @@ export function AboutSection() {
             </p>
             <p>Want to chat about data, AI, or how they can transform your ideas? Let's connect!</p>
           </div>
-          <div className="pt-4 flex items-center space-x-4">
-            <div className="w-12 h-12 rounded-md overflow-hidden border border-gray-800">
-              <div className="w-full h-full bg-[url('/placeholder.svg')] bg-cover bg-center"></div>
-            </div>
-            <div>
-              <div className="text-gray-300">Currently listening to</div>
-              <div className="text-gray-500 text-sm">Creep - Radiohead</div>
-            </div>
-          </div>
+
         </div>
       </div>
     </SectionLayout>
   )
-} 
+}
