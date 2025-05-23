@@ -1,8 +1,9 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState } from "react"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
+import { useVideoAutoplay } from "@/hooks/useVideoAutoplay"
 
 interface SkillCardProps {
   videoSrc: string
@@ -14,22 +15,34 @@ interface SkillCardProps {
 
 export function SkillCard({ videoSrc, title, hook, description, index }: SkillCardProps) {
   const [isHovered, setIsHovered] = useState(false)
-  const videoRef = useRef<HTMLVideoElement>(null)
+  
+  const {
+    videoRef,
+    containerRef,
+    isVisible,
+    playVideo
+  } = useVideoAutoplay({
+    threshold: 0.3,
+    rootMargin: "0px 0px 100px 0px",
+    resetOnExit: true
+  })
 
   const handleMouseEnter = () => {
     setIsHovered(true)
-    if (videoRef.current) {
-      videoRef.current.currentTime = 0
-      videoRef.current.play().catch(error => console.error("Video play failed:", error));
-    }
+    playVideo()
   }
 
   const handleMouseLeave = () => {
     setIsHovered(false)
   }
 
+  const handleTouchStart = () => {
+    playVideo()
+  }
+
   return (
     <motion.div
+      ref={containerRef}
       className={cn(
         "relative group overflow-hidden rounded-lg border border-gray-800 bg-black flex flex-col md:flex-row",
       )}
@@ -39,6 +52,7 @@ export function SkillCard({ videoSrc, title, hook, description, index }: SkillCa
       transition={{ duration: 0.5, delay: index * 0.1 }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={handleTouchStart}
       whileHover={{ y: -5, transition: { duration: 0.3 } }}
     >
       <div className="w-full md:w-1/3 aspect-square bg-gray-900 overflow-hidden relative md:rounded-l-lg md:rounded-r-none rounded-t-lg"> 
@@ -47,6 +61,7 @@ export function SkillCard({ videoSrc, title, hook, description, index }: SkillCa
           src={videoSrc}
           muted
           playsInline
+          poster="/assets/ui/video-placeholder.svg"
           className="w-full h-full object-cover"
         />
       </div>

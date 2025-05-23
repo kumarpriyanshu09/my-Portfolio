@@ -2,56 +2,36 @@
 
 import { AnimatedText } from "@/components/animated-text"
 import { SectionLayout } from "@/components/templates/section-layout"
-import { useRef, useEffect } from "react"
+import { useRef } from "react"
+import { useVideoAutoplay } from "@/hooks/useVideoAutoplay"
 
 export function AboutSection() {
-  const videoRef = useRef<HTMLVideoElement>(null)
   const sectionRef = useRef<HTMLDivElement>(null)
-  const hasPlayedOnView = useRef(false)
+  const { 
+    videoRef,
+    containerRef,
+    isPlaying,
+    playVideo
+  } = useVideoAutoplay({
+    threshold: 0.25,
+    resetOnExit: false,
+    preload: "metadata"
+  })
 
-  // Play video fully only the first time About section enters viewport
-  useEffect(() => {
-    const section = sectionRef.current
-    if (!section) return
-
-    const observer = new window.IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasPlayedOnView.current) {
-            if (videoRef.current) {
-              videoRef.current.currentTime = 0
-              videoRef.current.play()
-              hasPlayedOnView.current = true
-            }
-          }
-        })
-      },
-      { threshold: 0.5 }
-    )
-    observer.observe(section)
-    return () => observer.disconnect()
-  }, [])
-
-  // Play on hover (desktop)
+  // Handle manual interaction events
   const handleMouseEnter = () => {
-    if (videoRef.current) {
-      videoRef.current.currentTime = 0
-      videoRef.current.play()
-    }
+    playVideo()
   }
 
-  // Play on tap (mobile)
-  const handleTouchStart = () => {
-    if (videoRef.current) {
-      videoRef.current.currentTime = 0
-      videoRef.current.play()
-    }
+  const handleTouchStart = (e: React.TouchEvent) => {
+    playVideo()
   }
 
   return (
     <SectionLayout id="about">
       <div ref={sectionRef} className="grid md:grid-cols-2 gap-12 items-center">
         <div
+          ref={containerRef}
           className="w-full max-w-xs md:max-w-sm aspect-[9/16] mx-auto"
           onMouseEnter={handleMouseEnter}
           onTouchStart={handleTouchStart}
@@ -60,7 +40,6 @@ export function AboutSection() {
             ref={videoRef}
             src="https://7qd5tdgxs26x480g.public.blob.vercel-storage.com/soy-ctWQMpIF5RKt61yILQlITFOvhsMeZp.mp4"
             className="w-full h-full object-cover bg-black"
-            preload="none"
             tabIndex={0}
             title="Intro video"
             playsInline
