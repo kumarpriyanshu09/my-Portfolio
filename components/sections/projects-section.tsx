@@ -9,6 +9,13 @@ import { SectionLayout } from "@/components/templates/section-layout"
 
 export const projects: Project[] = [ // Added export
   {
+    title: "FROM BLANK CANVAS TO DIGITAL MASTERPIECE",
+    description: "The story of vibe coding, AI collaboration, and why the future of development is more creative than you think. A deep dive into building a personal portfolio using modern AI tools.",
+    technologies: ["AI", "NEXT.JS", "VERCEL", "TAILWIND CSS", "CHATGPT", "KLING AI", "V0.DEV", "CLAUDE", "CURSOR", "WINDSURF"],
+    href: "/projects/vibe-code-portfolio",
+    callToAction: "Read the Story"
+  },
+  {
     title: "AI DASHBOARD",
     description: "Interactive Tableau dashboard exploring AI\'s impact on industries, employment, and society. This project showcases data visualization techniques to present complex AI trends clearly.",
     technologies: ["TABLEAU", "DATA VISUALIZATION", "INTERACTIVE DASHBOARD"],

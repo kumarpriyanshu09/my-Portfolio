@@ -1,0 +1,37 @@
+/* app/projects/vibe-code-portfolio/styles.css */
+
+/* Styles from the provided content - KEEP THESE */
+.text-scramble__content {
+  font-size: 15vw; /* Consider making this responsive or using Tailwind's responsive font sizes */
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: #dfdcff; /* Ensure this color fits the overall theme or use a Tailwind color */
+  /* This isn't just text—it's a feeling */
+}
+
+.gradient-text {
+  background: linear-gradient(to right, #ff6b6b, #a16bff); /* Ensure these colors fit the theme */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* Words that literally glow with personality */
+}
+
+/* REMOVE .vibe-code-article-container and its child element styles as they are now handled by Tailwind Prose */
+
+/*
+  CSS variable definitions for reference (using suggested hex codes) - these can be removed if not used elsewhere or defined globally.
+  For now, they are commented out as Tailwind Prose and inline styles handle most of this.
+  :root {
+    --color-text-primary: #e5e7eb; (Tailwind gray-200)
+    --color-text-secondary: #9ca3af; (Tailwind gray-400)
+    --color-text-muted: #6b7280; (Tailwind gray-500)
+    --color-text-emphasis: #f3f4f6; (Tailwind gray-100)
+    --color-border-default: #374151; (Tailwind gray-700)
+    --color-border-muted: #4b5563; (Tailwind gray-600)
+    --color-background-code: #1f2937; (Tailwind gray-800)
+    --color-text-code: #d1d5db; (Tailwind gray-300)
+    --font-family-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+*/
