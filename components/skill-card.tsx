@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { useVideoAutoplay } from "@/hooks/useVideoAutoplay"
@@ -19,17 +19,43 @@ export function SkillCard({ videoSrc, title, hook, description, index }: SkillCa
   const {
     videoRef,
     containerRef,
-    isVisible,
+    isPlaying,
     playVideo
   } = useVideoAutoplay({
-    threshold: 0.3,
-    rootMargin: "0px 0px 100px 0px",
-    resetOnExit: true
+    threshold: 0.5,
+    resetOnExit: true,
+    preload: "auto"
   })
+
+  useEffect(() => {
+    const playVideoOnLoad = async () => {
+      try {
+        if (videoRef.current) {
+          videoRef.current.load();
+          await videoRef.current.play();
+        }
+      } catch (error) {
+        console.log("Autoplay prevented:", error);
+      }
+    };
+
+    playVideoOnLoad();
+  }, []);
+
+  const handleInteraction = () => {
+    if (videoRef.current) {
+      if (!isPlaying) {
+        videoRef.current.currentTime = 0;
+        videoRef.current.play().catch(error => {
+          console.log("Playback failed:", error);
+        });
+      }
+    }
+  };
 
   const handleMouseEnter = () => {
     setIsHovered(true)
-    playVideo()
+    handleInteraction()
   }
 
   const handleMouseLeave = () => {
@@ -37,7 +63,8 @@ export function SkillCard({ videoSrc, title, hook, description, index }: SkillCa
   }
 
   const handleTouchStart = () => {
-    playVideo()
+    setIsHovered(true)
+    handleInteraction()
   }
 
   return (
@@ -59,11 +86,19 @@ export function SkillCard({ videoSrc, title, hook, description, index }: SkillCa
         <video
           ref={videoRef}
           src={videoSrc}
-          muted
-          playsInline
-          poster="/assets/ui/video-placeholder.svg"
           className="w-full h-full object-cover"
-        />
+          tabIndex={0}
+          title="Skill video"
+          playsInline={true}
+          loop={false}
+          muted={true}
+          autoPlay={true}
+          preload="auto"
+          poster="/assets/ui/video-placeholder.svg"
+          aria-label="Skill demonstration video"
+        >
+          Sorry, your browser does not support embedded videos.
+        </video>
       </div>
 
       <div className={cn(

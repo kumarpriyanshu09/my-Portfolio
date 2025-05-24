@@ -2,7 +2,7 @@
 
 import { AnimatedText } from "@/components/animated-text"
 import { SectionLayout } from "@/components/templates/section-layout"
-import { useRef } from "react"
+import { useRef, useEffect } from "react"
 import { useVideoAutoplay } from "@/hooks/useVideoAutoplay"
 
 export function AboutSection() {
@@ -13,18 +13,22 @@ export function AboutSection() {
     isPlaying,
     playVideo
   } = useVideoAutoplay({
-    threshold: 0.25,
-    resetOnExit: false,
-    preload: "metadata"
+    threshold: 0.5, // Increased threshold for better timing
+    resetOnExit: true, // Reset when out of view
+    preload: "auto" // Changed to auto for better loading
   })
 
   // Handle manual interaction events
-  const handleMouseEnter = () => {
-    playVideo()
-  }
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    playVideo()
+  const handleInteraction = () => {
+    if (videoRef.current) {
+      // Only restart video if it's not currently playing
+      if (!isPlaying) {
+        videoRef.current.currentTime = 0;
+        videoRef.current.play().catch(error => {
+          console.log("Playback failed:", error);
+        });
+      }
+    }
   }
 
   return (
@@ -33,8 +37,9 @@ export function AboutSection() {
         <div
           ref={containerRef}
           className="w-full max-w-xs md:max-w-sm aspect-[9/16] mx-auto"
-          onMouseEnter={handleMouseEnter}
-          onTouchStart={handleTouchStart}
+          onMouseEnter={handleInteraction}
+          onTouchStart={handleInteraction}
+          onClick={handleInteraction}
         >
           <video
             ref={videoRef}
@@ -42,12 +47,13 @@ export function AboutSection() {
             className="w-full h-full object-cover bg-black"
             tabIndex={0}
             title="Intro video"
-            playsInline
+            playsInline={true}
             loop={false}
-            controls={false}
-            aria-label="Intro video"
+            muted={true}
+            autoPlay={true}
+            preload="auto"
             poster="/assets/ui/placeholder.svg"
-            muted
+            aria-label="Intro video"
           >
             Sorry, your browser does not support embedded videos.
           </video>

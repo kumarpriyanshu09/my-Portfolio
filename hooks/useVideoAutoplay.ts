@@ -98,30 +98,35 @@ export function useVideoAutoplay(options: VideoAutoplayOptions = {}) {
     return () => observer.disconnect();
   }, [threshold, rootMargin, resetOnExit, hasPlayed, isPlaying, isMobile]);
 
+  // Add event listener for when the video ends
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      const handleVideoEnd = () => {
+        setIsPlaying(false);
+        // Optionally, reset hasPlayed if you want the intersection observer to replay it automatically on re-scroll
+        // if (resetOnExit) setHasPlayed(false);
+      };
+
+      video.addEventListener('ended', handleVideoEnd);
+      return () => {
+        video.removeEventListener('ended', handleVideoEnd);
+      };
+    }
+  }, [videoRef, resetOnExit]);
+
+  // Function to manually play the video
   const playVideo = () => {
-    if (videoRef.current) {
+    if (videoRef.current && !isPlaying) {
       videoRef.current.currentTime = 0;
       videoRef.current.play()
-        .then(() => setIsPlaying(true))
-        .catch(error => console.error("Video play failed:", error));
+        .then(() => {
+          setIsPlaying(true);
+          setHasPlayed(true);
+        })
+        .catch(error => console.log("Manual play failed:", error));
     }
   };
 
-  const pauseVideo = () => {
-    if (videoRef.current && isPlaying) {
-      videoRef.current.pause();
-      setIsPlaying(false);
-    }
-  };
-
-  return {
-    videoRef,
-    containerRef,
-    isVisible,
-    hasPlayed,
-    isPlaying,
-    isMobile,
-    playVideo,
-    pauseVideo,
-  };
-} 
+  return { videoRef, containerRef, isVisible, isPlaying, playVideo };
+}
