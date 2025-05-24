@@ -7,7 +7,7 @@ import { ProjectCard } from "@/components/project-card"
 import { Project } from "@/lib/types"
 import { SectionLayout } from "@/components/templates/section-layout"
 
-const projects: Project[] = [
+export const projects: Project[] = [ // Added export
   {
     title: "AI DASHBOARD",
     description: "Interactive Tableau dashboard exploring AI\'s impact on industries, employment, and society. This project showcases data visualization techniques to present complex AI trends clearly.",
