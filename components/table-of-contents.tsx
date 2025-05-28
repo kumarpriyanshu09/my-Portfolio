@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from 'react';
-// import Link from 'next/link'; // Though for same-page links, <a> might be simpler
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { cn } from '@/lib/utils'; // For conditional classes
 
 interface Heading {
@@ -12,44 +11,110 @@ interface Heading {
 
 interface TableOfContentsProps {
   headings: Heading[];
-  // Optional: offset for scroll position, if there's a fixed header
-  scrollOffset?: number; 
+  scrollOffset?: number;
 }
+
+const ACTIVATION_BAND_HEIGHT = 100; // Height of the activation band in pixels
 
 export function TableOfContents({ headings, scrollOffset = 0 }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [visibleHeadings, setVisibleHeadings] = useState<Set<string>>(new Set());
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
-  const handleScroll = useCallback(() => {
-    let currentActiveId: string | null = null;
-    let smallestDistance = Infinity;
-
-    headings.forEach(heading => {
-      const element = document.getElementById(heading.id);
-      if (element) {
-        const rect = element.getBoundingClientRect();
-        // Check if the top of the element is within a certain range from the top of the viewport
-        // The range can be adjusted, e.g., from 0 to 1/4 of viewport height
-        // Or, more simply, find the one closest to the top (scrollOffset)
-        const distanceToTop = Math.abs(rect.top - scrollOffset);
-
-        if (rect.top >= 0 && rect.top <= window.innerHeight * 0.5 && distanceToTop < smallestDistance) {
-            smallestDistance = distanceToTop;
-            currentActiveId = heading.id;
-        } else if (currentActiveId === null && distanceToTop < smallestDistance) {
-            // Fallback for elements not strictly in the "ideal" view but still closest
-            smallestDistance = distanceToTop;
-            currentActiveId = heading.id;
-        }
-      }
-    });
-    setActiveId(currentActiveId);
-  }, [headings, scrollOffset]);
+  // We are only interested in h2 for the TOC as per the plan
+  const filteredHeadings = useMemo(() => headings.filter(h => h.level === 2), [headings]);
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [handleScroll]);
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
+
+    if (typeof window === 'undefined') return; // Guard against SSR
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        const newVisibleHeadings = new Set(visibleHeadings);
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            newVisibleHeadings.add(entry.target.id);
+          } else {
+            newVisibleHeadings.delete(entry.target.id);
+          }
+        });
+        setVisibleHeadings(newVisibleHeadings);
+      },
+      {
+        rootMargin: `-${Math.max(scrollOffset - 1, 0)}px 0px -${window.innerHeight - scrollOffset - ACTIVATION_BAND_HEIGHT}px 0px`,
+        threshold: 0.01, // Trigger as soon as a tiny part is visible within the rootMargin
+      }
+    );
+
+    const currentObserver = observerRef.current;
+
+    filteredHeadings.forEach((heading: Heading) => {
+      const element = document.getElementById(heading.id);
+      if (element) {
+        currentObserver.observe(element);
+      }
+    });
+
+    return () => {
+      if (currentObserver) {
+        currentObserver.disconnect();
+      }
+    };
+  }, [filteredHeadings, scrollOffset]); // Removed visibleHeadings to prevent infinite re-render loop
+
+  useEffect(() => {
+    if (visibleHeadings.size === 0) {
+      // If no headings are in the "activation band", try to find the closest one above the viewport
+      // or the first one if all are below.
+      let bestFallbackId: string | null = null;
+      let smallestNegativeDistance = -Infinity; // For elements above the scrollOffset
+      let smallestPositiveDistance = Infinity; // For elements below the scrollOffset (first one)
+
+      filteredHeadings.forEach((heading: Heading) => {
+        const element = document.getElementById(heading.id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          const distanceToScrollOffset = rect.top - scrollOffset;
+
+          if (distanceToScrollOffset < 0 && distanceToScrollOffset > smallestNegativeDistance) {
+            // Element is above the scrollOffset line and closer than previous
+            smallestNegativeDistance = distanceToScrollOffset;
+            bestFallbackId = heading.id;
+          } else if (distanceToScrollOffset >= 0 && distanceToScrollOffset < smallestPositiveDistance && bestFallbackId === null) {
+            // Element is below or at the scrollOffset line, and it's the first one we've encountered in this situation
+            // This ensures we pick the topmost one if all are below the scrollOffset
+            smallestPositiveDistance = distanceToScrollOffset;
+            bestFallbackId = heading.id;
+          }
+        }
+      });
+       // If no element is above, and we found one below, use it.
+      if (smallestNegativeDistance === -Infinity && smallestPositiveDistance !== Infinity) {
+        setActiveId(bestFallbackId);
+      } else if (smallestNegativeDistance !== -Infinity) {
+         setActiveId(bestFallbackId);
+      } else if (filteredHeadings.length > 0) {
+        // Default to the first heading if no other logic applies
+        setActiveId(filteredHeadings[0].id);
+      } else {
+        setActiveId(null);
+      }
+      return;
+    }
+
+    // Find the first heading in DOM order that is currently visible
+    for (const heading of filteredHeadings) {
+      if (visibleHeadings.has(heading.id)) {
+        setActiveId(heading.id);
+        return;
+      }
+    }
+    // setActiveId(null); // Should not be reached if visibleHeadings is not empty and contains valid IDs
+  }, [visibleHeadings, filteredHeadings, scrollOffset]);
+
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
@@ -57,27 +122,24 @@ export function TableOfContents({ headings, scrollOffset = 0 }: TableOfContentsP
     if (element) {
       const y = element.getBoundingClientRect().top + window.pageYOffset - scrollOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
-      // Optionally set activeId here too, though scroll handler should catch it
+      // Set activeId immediately for responsiveness, IntersectionObserver will confirm
       setActiveId(id);
     }
   };
 
-  if (!headings || headings.length === 0) {
+  if (!filteredHeadings || filteredHeadings.length === 0) {
     return null;
   }
-
-  // We are only interested in h2 for the TOC as per the plan
-  const filteredHeadings = headings.filter(h => h.level === 2);
 
   return (
     <nav className="sticky top-24 p-4 max-w-xs hidden md:block"> {/* Adjust 'top-24' based on header height */}
       <h3 className="text-lg font-semibold mb-3 text-gray-300">On this page</h3>
       <ul className="space-y-2">
-        {filteredHeadings.map((heading) => (
+        {filteredHeadings.map((heading: Heading) => (
           <li key={heading.id}>
             <a
               href={`#${heading.id}`}
-              onClick={(e) => handleClick(e, heading.id)}
+              onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleClick(e, heading.id)}
               className={cn(
                 "block text-sm hover:text-pink-400 transition-colors",
                 activeId === heading.id ? "text-pink-500 font-semibold" : "text-gray-400"

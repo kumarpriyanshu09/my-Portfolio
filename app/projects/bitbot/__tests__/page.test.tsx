@@ -42,11 +42,12 @@ describe('BitBotProjectPage Component', () => {
     render(<BitBotProjectPage />);
     // There are two such buttons/links
     const demoButtons = screen.getAllByText('Try BitBot Demo');
-    expect(demoButtons.length).toBeGreaterThanOrEqual(1); // Check if at least one is present
+    expect(demoButtons).toHaveLength(2); // Check for exactly two buttons
     demoButtons.forEach(button => {
       expect(button).toBeInTheDocument();
     });
     // Also check for the icon within the button
-    expect(screen.getAllByTestId('mock-arrow-up-right').length).toBeGreaterThanOrEqual(1);
+    const icons = screen.getAllByTestId('mock-arrow-up-right');
+    expect(icons).toHaveLength(2); // Check for exactly two icons
   });
 });

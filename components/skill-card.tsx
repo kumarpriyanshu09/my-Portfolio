@@ -28,18 +28,13 @@ export function SkillCard({ videoSrc, title, hook, description, index }: SkillCa
   })
 
   useEffect(() => {
-    const playVideoOnLoad = async () => {
-      try {
-        if (videoRef.current) {
-          videoRef.current.load();
-          await videoRef.current.play();
-        }
-      } catch (error) {
-        console.log("Autoplay prevented:", error);
+    const preloadVideo = () => {
+      if (videoRef.current) {
+        videoRef.current.load();
       }
     };
 
-    playVideoOnLoad();
+    preloadVideo();
   }, []);
 
   const handleInteraction = () => {
@@ -67,6 +62,10 @@ export function SkillCard({ videoSrc, title, hook, description, index }: SkillCa
     handleInteraction()
   }
 
+  const handleTouchEnd = () => {
+    setIsHovered(false)
+  }
+
   return (
     <motion.div
       ref={containerRef}
@@ -80,6 +79,8 @@ export function SkillCard({ videoSrc, title, hook, description, index }: SkillCa
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchEnd}
       whileHover={{ y: -5, transition: { duration: 0.3 } }}
     >
       <div className="w-full md:w-1/3 aspect-square bg-gray-900 overflow-hidden relative md:rounded-l-lg md:rounded-r-none rounded-t-lg"> 
