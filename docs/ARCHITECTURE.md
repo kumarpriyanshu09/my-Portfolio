@@ -120,10 +120,19 @@ graph TD
 
 ### 3. State Management
 
-- **React Hooks**: Primarily `useState` and `useReducer` for local component state.
-- **Context API**: Used for global state, notably for theme management via `next-themes` and potentially custom contexts like `lib/contexts/theme-context.tsx`.
-- **URL State**: For shareable and bookmarkable states where appropriate (standard Next.js routing capabilities).
-- **Server State**: Managed via Next.js data fetching methods (see below). No explicit client-side server state libraries like React Query or SWR are listed in `package.json`.
+State in this project is managed at both the local (component) and global (application) levels, using a combination of React primitives and Next.js features.
+
+#### Local State
+
+- **useState**: For simple component state.
+- **useReducer**: For complex state logic.
+- **useImmer**: For nested state updates.
+
+#### Global State
+
+- **Context API**: Used for application-wide state, such as theme management (e.g., via `next-themes` and custom contexts like `lib/contexts/theme-context.tsx`).
+- **URL State**: For shareable and bookmarkable UI states, leveraging Next.js routing.
+- **Server State**: Managed via Next.js data fetching methods (see Data Fetching section). No explicit client-side server state libraries like React Query or SWR are listed in `package.json`—data fetching and caching primarily rely on Next.js built-in mechanisms.
 
 ### 4. Data Fetching
 
@@ -131,25 +140,6 @@ graph TD
 - **Server-Side Rendering (SSR)**: For dynamic content
 - **Incremental Static Regeneration (ISR)**: For pages that can be revalidated
 - **Client-Side Fetching**: For highly dynamic data
-
-## State Management
-
-### Local State
-
-- **useState**: For simple component state
-- **useReducer**: For complex state logic
-- **useImmer**: For nested state updates
-
-### Global State
-
-- **Context API**: For application-wide state
-- **React Query/SWR**: Not explicitly listed in `package.json`. Data fetching and caching primarily rely on Next.js built-in mechanisms.
-- **URL State**: For shareable UI states.
-
-### Data Fetching Caching
-
-- **Next.js Caching**: Leverages Next.js's built-in caching for data fetched via its data fetching methods.
-- **Browser Caching**: Custom headers in `next.config.mjs` are configured for long-term caching of static assets (`Cache-Control: public, max-age=31536000, immutable`).
 
 ## Data Flow
 

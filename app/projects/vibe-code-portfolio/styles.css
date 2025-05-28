@@ -1,12 +1,12 @@
-/* app/projects/vibe-code-portfolio/styles.css */
+app/* app/projects/vibe-code-portfolio/styles.css */
 
 /* Styles from the provided content - KEEP THESE */
 .text-scramble__content {
-  font-size: 15vw; /* Consider making this responsive or using Tailwind's responsive font sizes */
+  font-size: clamp(2.5rem, 8vw, 7rem); /* Responsive: min 2.5rem, scales with viewport, max 7rem */
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1;
-  color: #dfdcff; /* Ensure this color fits the overall theme or use a Tailwind color */
+  color: hsl(var(--primary-foreground)); /* Use theme-based color for consistency */
   /* This isn't just text—it's a feeling */
 }
 

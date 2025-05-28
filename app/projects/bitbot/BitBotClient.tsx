@@ -5,6 +5,8 @@ import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedText } from "@/components/animated-text";
 import Link from "next/link";
+import Image from "next/image";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 export default function BitBotClient() {
   return (
@@ -28,19 +30,18 @@ export default function BitBotClient() {
             </p>
           </div>
         </section>
-        {/* Project Mockup */}
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold text-gray-200">BitBot Interface</h2>
-          <div className="aspect-video bg-gray-900 rounded-lg border border-gray-800 flex items-center justify-center">
-            <div className="text-center space-y-4">
-              <p className="text-gray-400">BitBot Chatbot Interface</p>
-              <Button variant="outline" className="inline-flex items-center">
-                <ArrowUpRight className="mr-2 h-4 w-4" />
-                Try BitBot Demo
-              </Button>
-            </div>
-          </div>
-        </section>
+        {/* Project Overview Image */}
+        <div className="max-w-3xl mx-auto my-8">
+          <AspectRatio ratio={16 / 9} className="bg-gray-900 border border-gray-800 rounded-lg shadow">
+            <Image
+              src="https://7qd5tdgxs26x480g.public.blob.vercel-storage.com/projects/Bitbot/Latest%20Crypto%20News-Tf5GLsyHcqSyX8oe7WauTVGK2E7zpc.png"
+              alt="BitBot showing latest crypto news"
+              fill
+              className="object-contain rounded-lg"
+              priority
+            />
+          </AspectRatio>
+        </div>
         {/* Business Problem */}
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold text-gray-200">Business Problem</h2>
@@ -160,6 +161,18 @@ export default function BitBotClient() {
             </div>
           </div>
         </section>
+        {/* BitBot Workflow Image */}
+        <div className="max-w-3xl mx-auto my-8">
+          <AspectRatio ratio={16 / 9} className="bg-gray-900 border border-gray-800 rounded-lg shadow">
+            <Image
+              src="https://7qd5tdgxs26x480g.public.blob.vercel-storage.com/projects/Bitbot/Latest%20Crypto%20News-Tf5GLsyHcqSyX8oe7WauTVGK2E7zpc.png"
+              alt="BitBot workflow diagram"
+              fill
+              className="object-contain rounded-lg"
+              priority
+            />
+          </AspectRatio>
+        </div>
         {/* Business Value */}
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold text-gray-200">Business Value</h2>
@@ -228,15 +241,6 @@ export default function BitBotClient() {
               financial firms enhancing their user engagement, BitBot delivers value efficiently and effectively.
             </p>
           </div>
-        </section>
-        {/* Call to Action */}
-        <section className="mt-12 text-center">
-          <Link href="#" target="_blank" rel="noopener noreferrer">
-            <Button size="lg" className="group">
-              Try BitBot Demo
-              <ArrowUpRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-            </Button>
-          </Link>
         </section>
       </div>
     </ProjectPageLayout>

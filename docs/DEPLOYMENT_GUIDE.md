@@ -152,16 +152,15 @@ To generate a static version of your site (e.g., for hosting on platforms that o
     ```
     *Note: Enabling static export may disable or change the behavior of certain Next.js features like API routes or dynamic rendering strategies.*
 
-2.  Build the static site:
+2.  Build and export the static site:
     ```bash
-    npm run build
+    npm run build && npx next export
     # or
-    yarn build
+    yarn build && yarn next export
     # or
-    pnpm build
+    pnpm build && pnpm next export
     ```
-
-3.  The static files will be generated in the `out` directory by default.
+    This will generate the static files in the `out` directory by default.
 
 ## Environment Configuration
 

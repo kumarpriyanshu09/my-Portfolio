@@ -17,18 +17,29 @@ const VibeCodePortfolioClient = () => {
   useEffect(() => {
     if (!contentRef.current) return;
 
-    const headingElements = Array.from(contentRef.current.querySelectorAll('h2')); // Capture H2 for TOC
+    const headingElements = Array.from(contentRef.current.querySelectorAll('h2'));
+    const usedIds = new Set<string>();
     const extractedHeadings = headingElements.map((elAsUnknown, index) => {
-      const el = elAsUnknown as HTMLHeadingElement; // Type assertion
+      const el = elAsUnknown as HTMLHeadingElement;
       let id = el.id;
       if (!id) {
-        const sanitizedText = el.textContent?.toLowerCase()
+        const baseId = el.textContent?.toLowerCase()
           .replace(/\s+/g, '-')
           .replace(/[^\w-]+/g, '')
           .replace(/--+/g, '-')
-          .replace(/^-+|-+$/g, '');
-        id = sanitizedText || `heading-${index}`;
+          .replace(/^-+|-+$/g, '') || `heading-${index}`;
+        let uniqueId = baseId;
+        let counter = 1;
+        while (usedIds.has(uniqueId)) {
+          uniqueId = `${baseId}-${counter}`;
+          counter++;
+        }
+        id = uniqueId;
         el.id = id;
+        usedIds.add(id);
+      } else {
+        // If the id already exists, still add it to the set to avoid future collisions
+        usedIds.add(id);
       }
       return { id, text: el.textContent || '', level: parseInt(el.tagName.substring(1), 10) };
     });

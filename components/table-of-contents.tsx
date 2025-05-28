@@ -33,15 +33,17 @@ export function TableOfContents({ headings, scrollOffset = 0 }: TableOfContentsP
 
     observerRef.current = new IntersectionObserver(
       (entries) => {
-        const newVisibleHeadings = new Set(visibleHeadings);
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            newVisibleHeadings.add(entry.target.id);
-          } else {
-            newVisibleHeadings.delete(entry.target.id);
-          }
+        setVisibleHeadings(prevVisibleHeadings => {
+          const newVisibleHeadings = new Set(prevVisibleHeadings);
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              newVisibleHeadings.add(entry.target.id);
+            } else {
+              newVisibleHeadings.delete(entry.target.id);
+            }
+          });
+          return newVisibleHeadings;
         });
-        setVisibleHeadings(newVisibleHeadings);
       },
       {
         rootMargin: `-${Math.max(scrollOffset - 1, 0)}px 0px -${window.innerHeight - scrollOffset - ACTIVATION_BAND_HEIGHT}px 0px`,

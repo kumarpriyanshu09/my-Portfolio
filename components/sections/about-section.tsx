@@ -2,7 +2,7 @@
 
 import { AnimatedText } from "@/components/animated-text"
 import { SectionLayout } from "@/components/templates/section-layout"
-import { useRef, useEffect } from "react"
+import { useRef } from "react"
 import { useVideoAutoplay } from "@/hooks/useVideoAutoplay"
 
 export function AboutSection() {
@@ -20,15 +20,7 @@ export function AboutSection() {
 
   // Handle manual interaction events
   const handleInteraction = () => {
-    if (videoRef.current) {
-      // Only restart video if it's not currently playing
-      if (!isPlaying) {
-        videoRef.current.currentTime = 0;
-        videoRef.current.play().catch(error => {
-          console.log("Playback failed:", error);
-        });
-      }
-    }
+    playVideo();
   }
 
   return (
