@@ -17,43 +17,72 @@ This document provides a high-level overview of the portfolio application's arch
 
 ```
 heyitspriyanshu/
-├── app/                    # App Router pages and layouts
-│   ├── layout.tsx         # Root layout
-│   ├── page.tsx           # Home page
-│   └── projects/          # Projects page and sub-pages
+├── app/                             # App Router: Pages, layouts, and global styles
+│   ├── globals.css                  # Global stylesheets
+│   ├── layout.tsx                   # Root layout
+│   ├── page.tsx                     # Home page (or other root page)
+│   └── projects/                    # Project-specific pages
+│       ├── [project-name]/          # Individual project page
+│       │   ├── page.tsx
+│       │   ├── AIDashboardClient.tsx  # Example client component
+│       │   └── __tests__/             # Project-specific tests
+│       └── layout.tsx                 # Layout for project pages
 │
-├── components/            # Reusable UI components
-│   ├── atoms/             # Atomic design atoms
-│   ├── molecules/         # Molecular components
-│   ├── organisms/         # Complex UI components
-│   ├── sections/          # Page sections
-│   ├── templates/         # Layout templates
-│   └── ui/                # shadcn/ui components
+├── components/                      # Reusable UI components
+│   ├── atoms/                       # Atomic design: basic building blocks (e.g., nav-link.tsx)
+│   ├── layout/                      # Layout-specific components (e.g., container.tsx, header.tsx)
+│   ├── organisms/                   # Atomic design: complex components (e.g., main-navigation.tsx)
+│   ├── sections/                    # Page sections (e.g., about-section.tsx, hero-section.tsx)
+│   │   └── __tests__/               # Tests for section components
+│   ├── templates/                   # Page-level layout structures (e.g., app-layout.tsx)
+│   ├── ui/                          # UI primitives, likely from shadcn/ui (e.g., button.tsx, card.tsx)
+│   │   └── __tests__/               # Tests for UI primitive components
+│   ├── animated-text.tsx            # Example direct components
+│   ├── certificate-card.tsx
+│   └── __tests__/                   # General component tests
 │
-├── hooks/                # Custom React hooks
-│   ├── use-media-query.ts
-│   └── use-scroll-spy.ts
+├── docs/                            # Project documentation
+│   ├── ARCHITECTURE.md
+│   ├── COMPONENT_GUIDE.md
+│   ├── DEPLOYMENT_GUIDE.md
+│   └── STYLING_GUIDE.md
 │
-├── lib/                  # Utility functions and shared code
-│   ├── utils.ts           # General utilities
-│   ├── animation.ts       # Animation variants
-│   └── constants/         # Application constants
+├── hooks/                           # Custom React hooks
+│   ├── use-mobile.tsx
+│   ├── use-scroll-animation.ts
+│   ├── use-scroll-top.ts
+│   ├── use-toast.ts
+│   └── useVideoAutoplay.ts
 │
-├── public/               # Static assets
-│   ├── images/            # Image assets
-│   └── docs/              # Document downloads
+├── lib/                             # Utility functions, shared code, and contexts
+│   ├── contexts/                    # React Context API providers
+│   │   └── theme-context.tsx        # Theme management context
+│   ├── types.ts                     # Shared TypeScript type definitions
+│   └── utils.ts                     # General utility functions
 │
-├── styles/               # Global styles
-│   ├── globals.css        # Global styles
-│   └── theme/             # Theme configurations
+├── public/                          # Static assets served directly
+│   ├── assets/                      # General assets
+│   │   ├── certificates/
+│   │   ├── education/
+│   │   ├── skills/
+│   │   ├── ui/
+│   │   └── vibe-code/
+│   └── videos/                      # Video assets
 │
-├── types/                # TypeScript type definitions
-│   └── index.ts
+├── styles/                          # (Potentially legacy or for specific overrides, globals in app/)
+│   └── globals.css                  # Global styles (primary in app/globals.css)
 │
-├── .env.local           # Environment variables
-├── next.config.mjs        # Next.js configuration
-├── tailwind.config.ts     # Tailwind CSS configuration
-└── tsconfig.json         # TypeScript configuration
+├── .env.local                       # Environment variables (gitignored)
+├── .gitignore
+├── components.json                  # Likely for shadcn/ui configuration
+├── jest.config.cjs                  # Jest test runner configuration
+├── next.config.mjs                  # Next.js configuration
+├── package.json                     # Project metadata and dependencies
+├── pnpm-lock.yaml                   # PNPM lockfile
+├── postcss.config.mjs               # PostCSS configuration
+├── README.md
+├── tailwind.config.ts               # Tailwind CSS configuration
+└── tsconfig.json                    # TypeScript configuration
 ```
 
 ## Architecture Diagram
@@ -73,24 +102,28 @@ graph TD
 
 ### 1. Component Architecture
 
-- **Atomic Design**: Components are organized following Atomic Design principles
-- **Composition**: Components are composed together to build complex UIs
-- **Reusability**: Common UI patterns are abstracted into reusable components
-- **Separation of Concerns**: UI, logic, and styles are co-located when possible
+- **Atomic Design**: Components are organized following Atomic Design principles, with directories like `atoms/`, `molecules/` (if present), `organisms/`.
+- **Reusable UI Primitives**: Extensive use of `components/ui/` which likely houses components from `shadcn/ui`, promoting consistency.
+- **Specialized Components**: Dedicated directories for `layout/` and `sections/` components.
+- **Composition**: Components are composed together to build complex UIs.
+- **Reusability**: Common UI patterns are abstracted into reusable components.
+- **Separation of Concerns**: UI, logic, and styles are co-located where appropriate.
 
 ### 2. Styling
 
-- **Tailwind CSS**: Utility-first CSS framework for styling
-- **CSS Variables**: For theming and design tokens
-- **CSS Modules**: For component-scoped styles when needed
-- **Responsive Design**: Mobile-first approach with responsive utilities
+- **Tailwind CSS**: Utility-first CSS framework for styling, configured in `tailwind.config.ts`.
+- **CSS Variables**: Extensive use of HSL-based CSS variables for theming (light/dark modes) and design tokens, defined in `app/globals.css` and referenced in `tailwind.config.ts`.
+- **Dark Mode**: Implemented using a `class` strategy via `next-themes` and Tailwind's `darkMode: ["class"]` configuration. CSS variables are updated within the `.dark {}` scope.
+- **Responsive Design**: Mobile-first approach leveraging Tailwind's responsive utilities.
+- **CSS Optimization**: `critters` is used for optimizing CSS, as specified in `next.config.mjs`.
+- **Plugins**: `tailwindcss-animate` for animations and `@tailwindcss/typography` for rich text styling.
 
 ### 3. State Management
 
-- **React Hooks**: For local component state
-- **Context API**: For global application state
-- **URL State**: For shareable and bookmarkable states
-- **Server State**: For data fetching and caching
+- **React Hooks**: Primarily `useState` and `useReducer` for local component state.
+- **Context API**: Used for global state, notably for theme management via `next-themes` and potentially custom contexts like `lib/contexts/theme-context.tsx`.
+- **URL State**: For shareable and bookmarkable states where appropriate (standard Next.js routing capabilities).
+- **Server State**: Managed via Next.js data fetching methods (see below). No explicit client-side server state libraries like React Query or SWR are listed in `package.json`.
 
 ### 4. Data Fetching
 
@@ -110,14 +143,13 @@ graph TD
 ### Global State
 
 - **Context API**: For application-wide state
-- **React Query**: For server state management
-- **URL State**: For shareable UI states
+- **React Query/SWR**: Not explicitly listed in `package.json`. Data fetching and caching primarily rely on Next.js built-in mechanisms.
+- **URL State**: For shareable UI states.
 
-### Data Fetching
+### Data Fetching Caching
 
-- **Static Data**: Pre-rendered at build time
-- **Dynamic Data**: Fetched client-side or server-side
-- **Caching**: Implemented with React Query
+- **Next.js Caching**: Leverages Next.js's built-in caching for data fetched via its data fetching methods.
+- **Browser Caching**: Custom headers in `next.config.mjs` are configured for long-term caching of static assets (`Cache-Control: public, max-age=31536000, immutable`).
 
 ## Data Flow
 
@@ -143,33 +175,37 @@ graph TD
 
 ### Image Optimization
 
-- **next/image**: For automatic image optimization
-- **Responsive Images**: Using `sizes` and `srcSet`
-- **Lazy Loading**: For offscreen images
+- **next/image**: Utilized for automatic image optimization, as configured in `next.config.mjs` (`unoptimized: false`).
+- **Formats**: Optimized to `image/avif` and `image/webp`.
+- **External Domains**: Configured for images from `7qd5tdgxs26x480g.public.blob.vercel-storage.com`.
+- **Responsive Images**: Standard `next/image` features like `sizes` and `srcSet` are available.
+- **Lazy Loading**: Default behavior for offscreen images with `next/image`.
 
 ### Bundle Optimization
 
-- **Tree Shaking**: Remove unused code
-- **Code Splitting**: Split code by route
-- **Deduplication**: Avoid duplicate dependencies
+- **Tree Shaking**: Standard with modern bundlers used by Next.js.
+- **Code Splitting**: Automatic route-based code splitting by Next.js.
+- **CSS Optimization**: `critters` is used to inline critical CSS, as per `next.config.mjs`.
+- **Deduplication**: Handled by the package manager (e.g., npm, pnpm).
 
 ## Testing Strategy
 
 ### Unit Testing
 
-- **Jest**: Test runner
-- **React Testing Library**: For component testing
-- **@testing-library/user-event**: For user interactions
+- **Jest**: Test runner, configured in `jest.config.cjs`.
+- **React Testing Library**: For component testing (`@testing-library/react`).
+- **@testing-library/jest-dom**: For custom Jest matchers for DOM elements.
+- **`ts-jest`**: For TypeScript support in Jest.
+- **`identity-obj-proxy`**: Used for mocking CSS modules in Jest tests.
+- **Test Files**: Located in `__tests__` subdirectories within `app/` and `components/`.
 
 ### Integration Testing
 
-- **Cypress**: For end-to-end testing
-- **Mock Service Worker (MSW)**: For API mocking
+- No dedicated integration testing tools like Cypress or MSW are explicitly listed in `package.json`. Testing seems focused on unit and component level with Jest and RTL.
 
 ### Visual Regression Testing
 
-- **Storybook**: For component development and testing
-- **Chromatic**: For visual regression testing
+- No dedicated visual regression testing tools like Storybook with Chromatic are explicitly listed in `package.json`.
 
 ## Security Considerations
 
@@ -191,9 +227,9 @@ graph TD
 
 ## Performance Monitoring
 
-- **Web Vitals**: Monitor Core Web Vitals
-- **Sentry**: For error tracking
-- **Custom Metrics**: For business-specific metrics
+- **Web Vitals**: Next.js has built-in support for measuring Core Web Vitals.
+- **Vercel Speed Insights**: Used for performance monitoring, as indicated by `@vercel/speed-insights` in `package.json`.
+- **Sentry**: Not explicitly listed in `package.json`.
 
 ## Error Handling
 
@@ -211,15 +247,14 @@ graph TD
 
 ## Internationalization (i18n)
 
-- **next-intl**: For internationalization
-- **Language Detection**: Auto-detect user's language
-- **RTL Support**: For right-to-left languages
+- No specific i18n libraries like `next-intl` are listed in `package.json`. This feature might not be implemented yet.
 
 ## Analytics
 
-- **Google Analytics**: For traffic analysis
-- **Custom Events**: Track user interactions
-- **Privacy-First**: Comply with GDPR and CCPA
+- **Vercel Analytics**: Used for traffic analysis, as indicated by `@vercel/analytics` in `package.json`.
+- **Google Analytics**: Environment variable `NEXT_PUBLIC_GA_MEASUREMENT_ID` suggests potential integration.
+- **Facebook Pixel**: Environment variable `NEXT_PUBLIC_FACEBOOK_PIXEL_ID` suggests potential integration.
+- **Custom Events**: Can be implemented with chosen analytics tools.
 
 ## Continuous Integration/Deployment (CI/CD)
 
@@ -243,14 +278,14 @@ graph TD
    - Add service worker for offline support
 
 2. **Testing**
-   - Increase test coverage
-   - Add visual regression tests
-   - Implement E2E tests
+   - Increase test coverage for components and pages.
+   - Consider adding integration tests (e.g., with Playwright, since `playwright-core` is a dependency, though it might be for other purposes like Browserbase SDK).
+   - Explore visual regression testing if UI consistency is critical.
 
 3. **Features**
-   - Add dark/light theme toggle
-   - Implement i18n
-   - Add search functionality
+   - Implement i18n if multi-language support is needed.
+   - Add search functionality if applicable.
+   - Further enhance accessibility features.
 
 4. **Developer Experience**
    - Add more detailed documentation

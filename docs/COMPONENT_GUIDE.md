@@ -4,44 +4,26 @@ This document provides an overview of the component architecture and usage guide
 
 ## Component Structure
 
-The project follows Atomic Design principles with the following component categories:
+The project organizes components with a methodology similar to Atomic Design, but adapted for this specific project structure. Components are located primarily within the `components/` directory and its subdirectories.
 
-### 1. Atoms
+### Core Component Directories:
 
-Basic building blocks of the UI:
+*   **`components/atoms/`**: Basic, indivisible building blocks of the UI.
+    *   Example: `nav-link.tsx`
+*   **`components/layout/`**: Components responsible for structuring the layout of pages or sections.
+    *   Examples: `container.tsx`, `header.tsx`
+*   **`components/organisms/`**: More complex UI components, typically composed of atoms, molecules (if any), or other organisms.
+    *   Example: `main-navigation.tsx`
+*   **`components/sections/`**: Large, distinct parts of a page, often corresponding to a specific content area.
+    *   Examples: `hero-section.tsx`, `about-section.tsx`, `projects-section.tsx`, `experience-section.tsx`, `education-section.tsx`, `certifications-section.tsx`, `what-can-i-do-section.tsx`, `get-in-touch-section.tsx`
+*   **`components/templates/`**: Page-level structures or layouts that define the arrangement of sections and other components.
+    *   Examples: `app-layout.tsx`, `section-layout.tsx`
+*   **`components/ui/`**: UI primitive components, largely based on [shadcn/ui](https://ui.shadcn.com/). This directory contains a wide array of reusable elements like buttons, cards, dialogs, etc.
+    *   Examples: `button.tsx`, `card.tsx`, `accordion.tsx`, `input.tsx`, `sheet.tsx`, `base-card.tsx` (custom extension)
+*   **`components/` (root)**: Contains various specific-purpose components that might not fit neatly into the above categories or are widely used.
+    *   Examples: `animated-text.tsx`, `scramble-text.tsx`, `project-card.tsx`, `certificate-card.tsx`, `skill-card.tsx`, `theme-provider.tsx`, `error-boundary.tsx`, `timeline-item.tsx`
 
-- **AnimatedText**: Text with animation effects
-- **ScrambleText**: Text that scrambles and unscrambles
-
-### 2. Molecules
-
-Groups of atoms functioning together:
-- (Add your molecules here)
-
-### 3. Organisms
-
-Complex UI components composed of molecules/atoms:
-- (Add your organisms here)
-
-### 4. Templates
-
-Page-level layout components:
-
-- **AppLayout**: Main application layout with header, main content, and footer
-- **SectionLayout**: Reusable section wrapper with consistent styling
-
-### 5. Sections
-
-Page sections used in the main layout:
-
-- **HeroSection**: Introduction/hero section
-- **AboutSection**: About me section
-- **ProjectsSection**: Showcase of projects
-- **ExperienceSection**: Work experience timeline
-- **EducationSection**: Education history
-- **CertificationsSection**: Certifications and badges
-- **WhatCanIDoSection**: Skills and capabilities
-- **GetInTouchSection**: Contact information
+*(Note: The `molecules` category is not explicitly present as a directory in the current structure.)*
 
 ## Component Props Documentation
 
@@ -87,18 +69,24 @@ interface CertificateCardProps {
 ## Best Practices
 
 1. **Props Naming**: Use descriptive prop names that indicate their purpose
-2. **Type Safety**: Always define TypeScript interfaces for component props
-3. **Styling**: Use Tailwind CSS utility classes for styling
-4. **Responsiveness**: Ensure components work well on all screen sizes
-5. **Accessibility**: Follow accessibility best practices (ARIA attributes, keyboard navigation, etc.)
+2. **Type Safety**: Always define TypeScript interfaces or types for component props.
+3. **Styling**:
+    *   Primarily use Tailwind CSS utility classes for styling.
+    *   Leverage CSS variables defined in `app/globals.css` for theming, consistent with `tailwind.config.ts`.
+    *   Use `clsx` or `tailwind-merge` (dependencies in `package.json`) for conditionally applying classes.
+4. **Responsiveness**: Ensure components work well on all screen sizes using Tailwind's responsive modifiers.
+5. **Accessibility**: Follow accessibility best practices (semantic HTML, ARIA attributes, keyboard navigation, focus management, etc.).
+6. **Path Aliases**: Use path aliases like `@/components/...` for imports, as configured in `tsconfig.json`.
 
 ## Adding New Components
 
-1. Create a new file in the appropriate directory
-2. Define TypeScript interfaces for props
-3. Add JSDoc comments for documentation
-4. Export the component as a named export
-5. Add the component to the appropriate index.ts file
+1.  Create a new `.tsx` file in the most appropriate subdirectory within `components/` (e.g., `components/atoms/`, `components/ui/`, `components/sections/`).
+2.  Define TypeScript interfaces or types for the component's props.
+3.  Implement the component logic and JSX structure.
+4.  Style the component using Tailwind CSS utility classes.
+5.  Add JSDoc comments for documentation, explaining the component's purpose and props.
+6.  Export the component as a named export.
+7.  If applicable, add unit tests for the component in a corresponding `__tests__` directory.
 
 Example:
 

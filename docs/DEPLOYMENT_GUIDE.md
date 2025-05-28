@@ -15,8 +15,8 @@ This guide provides instructions for deploying the portfolio application to vari
 
 ## Prerequisites
 
-- Node.js 18.0.0 or later
-- npm or yarn package manager
+- Node.js 18.0.0 or later (as implied by modern Next.js usage)
+- npm, yarn, or pnpm package manager (project uses `pnpm-lock.yaml`)
 - Git
 - Vercel or Netlify account (for deployment)
 
@@ -50,6 +50,8 @@ NEXT_PUBLIC_LINKEDIN_TOKEN=your-linkedin-token
    npm install
    # or
    yarn install
+   # or
+   pnpm install
    ```
 
 3. Start the development server:
@@ -57,6 +59,8 @@ NEXT_PUBLIC_LINKEDIN_TOKEN=your-linkedin-token
    npm run dev
    # or
    yarn dev
+   # or
+   pnpm dev
    ```
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -73,11 +77,12 @@ NEXT_PUBLIC_LINKEDIN_TOKEN=your-linkedin-token
    - Configure project settings:
      - Framework Preset: Next.js
      - Root Directory: (leave empty if root)
-     - Build Command: `npm run build` or `yarn build`
-     - Output Directory: `.next`
-     - Install Command: `npm install` or `yarn install`
-   - Add environment variables
+     - Build Command: `next build` (or `npm run build`, `yarn build`, `pnpm build`)
+     - Output Directory: `.next` (default for Next.js)
+     - Install Command: `npm install` or `yarn install` or `pnpm install`
+   - Add environment variables in the Vercel project settings.
    - Click "Deploy"
+   - The project uses Vercel Analytics (`@vercel/analytics`), Speed Insights (`@vercel/speed-insights`), and potentially Vercel Blob (`@vercel/blob`), which integrate well with Vercel deployments.
 
 ### Manual Deployment
 
@@ -100,9 +105,9 @@ NEXT_PUBLIC_LINKEDIN_TOKEN=your-linkedin-token
 3. Click "Sites" > "Import an existing project"
 4. Connect to your Git provider and select the repository
 5. Configure build settings:
-   - Build command: `npm run build` or `yarn build`
-   - Publish directory: `.next`
-   - Add environment variables
+   - Build command: `next build` (or `npm run build`, `yarn build`, `pnpm build`)
+   - Publish directory: `.next` (default for Next.js)
+   - Add environment variables in Netlify site settings.
 6. Click "Deploy site"
 
 ### Manual Deployment
@@ -112,6 +117,8 @@ NEXT_PUBLIC_LINKEDIN_TOKEN=your-linkedin-token
    npm run build
    # or
    yarn build
+   # or
+   pnpm build
    ```
 
 2. Install Netlify CLI:
@@ -126,28 +133,35 @@ NEXT_PUBLIC_LINKEDIN_TOKEN=your-linkedin-token
 
 ## Static Export
 
-To generate a static version of your site:
+To generate a static version of your site (e.g., for hosting on platforms that only serve static files):
 
-1. Update `next.config.js` to enable static exports:
-   ```js
-   /** @type {import('next').NextConfig} */
-   const nextConfig = {
-     output: 'export',
-     // Optional: Add a trailing slash for GitHub Pages
-     // trailingSlash: true,
-   }
-   
-   module.exports = nextConfig
-   ```
+1.  **Important**: The current `next.config.mjs` does **not** have `output: 'export'` configured. To enable static export, you would need to modify `next.config.mjs`:
+    ```javascript
+    // next.config.mjs
+    /** @type {import('next').NextConfig} */
+    const nextConfig = {
+      output: 'export', // Add this line
+      experimental: {
+        scrollRestoration: false,
+        optimizeCss: true,
+      },
+      reactStrictMode: true,
+      // ... other configurations
+    };
+    export default nextConfig;
+    ```
+    *Note: Enabling static export may disable or change the behavior of certain Next.js features like API routes or dynamic rendering strategies.*
 
-2. Build the static site:
-   ```bash
-   npm run build
-   # or
-   yarn build
-   ```
+2.  Build the static site:
+    ```bash
+    npm run build
+    # or
+    yarn build
+    # or
+    pnpm build
+    ```
 
-3. The static files will be in the `out` directory.
+3.  The static files will be generated in the `out` directory by default.
 
 ## Environment Configuration
 
@@ -182,8 +196,8 @@ To generate a static version of your site:
 
 2. **Missing Dependencies**
    ```bash
-   rm -rf node_modules package-lock.json
-   npm install
+   rm -rf node_modules package-lock.json yarn.lock pnpm-lock.yaml
+   npm install # or yarn install or pnpm install
    ```
 
 3. **Environment Variables**
@@ -220,9 +234,9 @@ To generate a static version of your site:
 
 ## Monitoring
 
-- **Vercel**: Built-in analytics and monitoring
-- **Sentry**: Error tracking
-- **Google Analytics**: Traffic and user behavior
+- **Vercel**: Provides built-in Analytics and Speed Insights, which this project utilizes (see `package.json`).
+- **Sentry**: Not currently listed as a dependency. For error tracking, consider integrating a service like Sentry if needed.
+- **Google Analytics**: Can be integrated if `NEXT_PUBLIC_GA_MEASUREMENT_ID` is configured.
 
 ## Security
 
