@@ -54,7 +54,7 @@ export function SkillCardDetailModal({
           onClick={onClose}
         >
           <motion.div
-            className="relative w-full max-w-lg bg-black/90 backdrop-blur-md rounded-3xl border border-gray-800/50 overflow-hidden max-h-[90vh]"
+            className="relative w-full max-w-lg bg-black backdrop-blur-md rounded-3xl border border-gray-800/50 overflow-hidden max-h-[90vh] shadow-2xl"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
@@ -68,31 +68,36 @@ export function SkillCardDetailModal({
               <X className="w-5 h-5" />
             </button>
 
-            {/* Video Section - Fixed Aspect Ratio */}
-            <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
-              <div className="absolute inset-0 bg-gray-900 overflow-hidden rounded-t-3xl">
+            {/* Video Section - Seamless Black Background */}
+            <div className="relative w-full bg-black" style={{ aspectRatio: "16/9" }}>
+              <div className="absolute inset-0 bg-black flex items-center justify-center overflow-hidden rounded-t-3xl">
                 <video
                   ref={videoRef}
                   src={videoSrc}
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-cover"
                   playsInline
                   loop
                   muted
                   onPlay={() => setIsPlaying(true)}
                   onPause={() => setIsPlaying(false)}
-                  style={{ objectPosition: "center" }}
+                  style={{
+                    objectPosition: "center",
+                    backgroundColor: "black",
+                  }}
                 />
 
                 {/* Play/Pause Overlay */}
                 <button
                   onClick={togglePlayPause}
-                  className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 hover:opacity-100 transition-opacity"
+                  className="absolute inset-0 flex items-center justify-center bg-transparent opacity-0 hover:opacity-100 transition-opacity"
                 >
-                  {isPlaying ? (
-                    <Pause className="w-12 h-12 text-white/80" fill="currentColor" />
-                  ) : (
-                    <Play className="w-12 h-12 text-white/80" fill="currentColor" />
-                  )}
+                  <div className="w-16 h-16 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center">
+                    {isPlaying ? (
+                      <Pause className="w-8 h-8 text-white/90" fill="currentColor" />
+                    ) : (
+                      <Play className="w-8 h-8 text-white/90 ml-1" fill="currentColor" />
+                    )}
+                  </div>
                 </button>
               </div>
             </div>
