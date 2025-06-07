@@ -5,12 +5,13 @@ import { TimelineItem } from "@/components/timeline-item"
 
 export function ExperienceSection() {
   return (
-    <section id="experience" className="py-20 px-4 md:px-10 max-w-7xl mx-auto">
-      <h2 className="text-5xl md:text-6xl font-bold text-gray-200 tracking-tighter mb-16 text-center">
+    <section id="experience" className="py-12 sm:py-16 lg:py-20 px-4 md:px-6 lg:px-10 max-w-6xl mx-auto">
+      <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-200 tracking-tighter mb-8 sm:mb-12 lg:mb-16 text-center">
         <AnimatedText text="EXPERIENCE" />
       </h2>
 
-      <div className="relative">
+      {/* Mobile-First Timeline */}
+      <div className="space-y-4 sm:space-y-6">
         <TimelineItem
           date="Aug 2024 - Dec 2024"
           title="Gen AI Engineer"
@@ -52,7 +53,6 @@ export function ExperienceSection() {
             "Refined data-collection protocols, lowering entry errors 15% and saving 10 h/week in preprocessing",
           ]}
           skills={["SQL", "R", "Power BI", "Excel", "ETL / Data Validation"]}
-          isLeft={true}
         />
 
         <TimelineItem

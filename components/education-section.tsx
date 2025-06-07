@@ -5,12 +5,13 @@ import { EducationCard } from "@/components/education-card"
 
 export function EducationSection() {
   return (
-    <section id="education" className="py-20 px-4 md:px-10 max-w-7xl mx-auto">
-      <h2 className="text-5xl md:text-6xl font-bold text-gray-200 tracking-tighter mb-16 text-center">
+    <section id="education" className="py-12 sm:py-16 lg:py-20 px-4 md:px-6 lg:px-10 max-w-6xl mx-auto">
+      <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-200 tracking-tighter mb-8 sm:mb-12 lg:mb-16 text-center">
         <AnimatedText text="EDUCATION" />
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* Mobile-First Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
         <EducationCard
           institution="University of Connecticut"
           degree="M.S"

@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { useState } from "react"
-import { ChevronDown } from "lucide-react"
+import { ChevronDown, GraduationCap, MapPin, Calendar } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface EducationCardProps {
@@ -32,68 +32,90 @@ export function EducationCard({
 
   return (
     <motion.div
-      className="relative group overflow-hidden rounded-lg border border-gray-800 bg-black p-6 w-full max-w-2xl mx-auto flex flex-col md:flex-row items-start gap-6 shadow-lg"
-      whileHover={{ y: -5 }}
+      className="relative bg-black/40 backdrop-blur-sm border border-gray-800/50 rounded-2xl p-4 sm:p-6 group hover:border-pink-500/30 transition-all duration-300"
+      whileHover={{ y: -3 }}
       transition={{ duration: 0.3 }}
     >
-      {/* Timeline Accent */}
-      <div className="absolute left-0 top-6 bottom-6 w-1 bg-pink-500 rounded-full opacity-70" style={{ minHeight: 60 }} />
+      {/* Mobile-First Header */}
+      <div className="flex items-start space-x-4 mb-4">
+        {/* Compact Logo */}
+        <div className="flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-xl overflow-hidden flex items-center justify-center shadow-lg">
+          <Image
+            src={logo || "/placeholder.svg"}
+            alt={`${institution} logo`}
+            width={48}
+            height={48}
+            className="object-contain max-h-full max-w-full"
+          />
+        </div>
 
-      {/* Logo */}
-      <div className="relative z-10 flex-shrink-0 flex items-center justify-center w-20 h-20 md:w-24 md:h-24 bg-white rounded-md overflow-hidden mr-0 md:mr-6">
-        <Image
-          src={logo}
-          alt={`${institution} logo`}
-          width={96}
-          height={96}
-          className="object-contain max-h-full max-w-full"
-        />
+        {/* Institution Info */}
+        <div className="flex-1 min-w-0">
+          <h3 className="text-lg sm:text-xl font-bold text-gray-200 leading-tight mb-1">{institution}</h3>
+          <div className="flex items-center text-gray-400 text-sm mb-2">
+            <MapPin className="w-3 h-3 mr-1 opacity-60" />
+            <span>{location}</span>
+          </div>
+          <div className="flex items-center text-xs text-gray-500 bg-gray-900/50 px-2 py-1 rounded-full w-fit">
+            <Calendar className="w-3 h-3 mr-1" />
+            {date}
+          </div>
+        </div>
       </div>
 
-      {/* Details */}
-      <div className="relative z-10 flex-1 flex flex-col">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2 gap-2">
+      {/* Degree Information */}
+      <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-lg p-3 mb-4 border border-blue-500/20">
+        <div className="flex items-start justify-between">
           <div>
-            <h3 className="text-xl font-bold text-gray-200 leading-tight">{institution}</h3>
-            <p className="text-gray-400 text-sm">{location}</p>
-          </div>
-          <span className="text-sm text-gray-500 whitespace-nowrap">{date}</span>
-        </div>
-
-        <div className="mb-2">
-          <p className="text-gray-300 font-medium">
-            {degree} in {field}
-          </p>
-          {gpa && <p className="text-gray-400 text-sm">GPA: {gpa}</p>}
-        </div>
-
-        {courses.length > 0 && (
-          <div>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="mt-2 text-pink-400 hover:text-pink-300 p-0 h-auto"
-            >
-              {isExpanded ? "Hide coursework" : "View relevant coursework"}
-              <ChevronDown className={cn("ml-1 h-3 w-3 transition-transform", isExpanded ? "rotate-180" : "")} />
-            </Button>
-
-            {isExpanded && (
-              <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2">
-                {courses.map((course, index) => (
-                  <div key={index} className="text-sm text-gray-400 py-1 px-2 bg-gray-900/50 rounded">
-                    {course}
-                  </div>
-                ))}
-              </div>
+            <p className="text-gray-300 font-medium text-sm sm:text-base">
+              {degree} in {field}
+            </p>
+            {gpa && (
+              <p className="text-gray-400 text-sm mt-1">
+                <span className="text-gray-500">GPA:</span> <span className="font-semibold">{gpa}</span>
+              </p>
             )}
           </div>
-        )}
+          <GraduationCap className="w-5 h-5 text-blue-400 opacity-60" />
+        </div>
       </div>
 
-      {/* Gradient overlay on hover */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+      {/* Coursework Section */}
+      {courses.length > 0 && (
+        <div>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="text-pink-400 hover:text-pink-300 p-0 h-auto text-sm mb-3"
+          >
+            {isExpanded ? "Hide coursework" : "View relevant coursework"}
+            <ChevronDown className={cn("ml-1 h-3 w-3 transition-transform", isExpanded ? "rotate-180" : "")} />
+          </Button>
+
+          <motion.div
+            initial={false}
+            animate={{ height: isExpanded ? "auto" : 0, opacity: isExpanded ? 1 : 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <div className="grid grid-cols-1 gap-2">
+              {courses.map((course, index) => (
+                <div
+                  key={index}
+                  className="text-sm text-gray-400 py-2 px-3 bg-gray-900/30 rounded-lg border border-gray-800/30 flex items-center"
+                >
+                  <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-3 flex-shrink-0"></div>
+                  {course}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      )}
+
+      {/* Subtle Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"></div>
     </motion.div>
   )
 }
