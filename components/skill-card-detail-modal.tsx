@@ -47,14 +47,14 @@ export function SkillCardDetailModal({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
         >
           <motion.div
-            className="relative w-full max-w-lg bg-black backdrop-blur-md rounded-3xl border border-gray-800/50 overflow-hidden max-h-[90vh] shadow-2xl"
+            className="relative w-full max-w-lg bg-black rounded-3xl border border-gray-800/50 overflow-hidden max-h-[90vh] shadow-2xl"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
