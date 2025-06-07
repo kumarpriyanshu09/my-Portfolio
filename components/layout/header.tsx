@@ -34,4 +34,4 @@ export function Header({ className }: HeaderProps) {
       <MainNavigation />
     </header>
   )
-} 
+}

@@ -51,4 +51,4 @@ export function ScrambleText({ text, className = "" }: ScrambleTextProps) {
       </div>
     </div>
   )
-} 
+}

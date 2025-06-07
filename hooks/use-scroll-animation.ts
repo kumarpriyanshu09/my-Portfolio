@@ -41,4 +41,4 @@ export function useScrollAnimation<T extends HTMLElement>(
   }, [ref, threshold, rootMargin, isVisible])
 
   return isVisible
-} 
+}

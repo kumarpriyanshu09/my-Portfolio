@@ -116,7 +116,7 @@ The project utilizes:
 
 ### Tailwind CSS Animations (from `tailwind.config.ts`)
 
-```javascript
+\`\`\`javascript
 // tailwind.config.ts
 keyframes: {
   'accordion-down': {
@@ -132,14 +132,14 @@ animation: {
   'accordion-down': 'accordion-down 0.2s ease-out',
   'accordion-up': 'accordion-up 0.2s ease-out',
 },
-```
+\`\`\`
 
 ### Framer Motion Example Variants (Illustrative)
 Common animation variants can be defined for Framer Motion. While `lib/animation.ts` was mentioned in the original docs, it's not present in the current file structure. If you create such a file, here are examples:
 
 ### Fade In
 
-```tsx
+\`\`\`tsx
 const fadeIn = {
   hidden: { opacity: 0 },
   visible: { 
@@ -147,11 +147,11 @@ const fadeIn = {
     transition: { duration: 0.5 }
   }
 };
-```
+\`\`\`
 
 ### Slide Up
 
-```tsx
+\`\`\`tsx
 const slideUp = {
   hidden: { y: 20, opacity: 0 },
   visible: { 
@@ -160,11 +160,11 @@ const slideUp = {
     transition: { duration: 0.5 }
   }
 };
-```
+\`\`\`
 
 ### Stagger Children
 
-```tsx
+\`\`\`tsx
 const container = {
   hidden: { opacity: 0 },
   visible: {
@@ -174,7 +174,7 @@ const container = {
     }
   }
 };
-```
+\`\`\`
 
 ## Dark Mode
 
@@ -184,7 +184,7 @@ The project supports dark mode using the `next-themes` library. The theme can be
 
 Dark mode variables are defined in `styles/globals.css` and are automatically applied when the dark class is present on the HTML element.
 
-```css
+\`\`\`css
 // app/globals.css
 :root {
   /* Light theme variables */
@@ -212,14 +212,14 @@ Dark mode variables are defined in `styles/globals.css` and are automatically ap
   --primary-foreground: 0 0% 9%;
   /* ... many more variables ... */
 }
-```
+\`\`\`
 The `theme-provider.tsx` component likely handles the theme switching logic using `next-themes`.
 
 ## Custom Utilities & Configurations
 
 ### Container Utility (from `tailwind.config.ts`)
 
-```javascript
+\`\`\`javascript
 // tailwind.config.ts
 theme: {
   container: {
@@ -231,29 +231,29 @@ theme: {
   },
   // ...
 }
-```
+\`\`\`
 
 ### Text Balance Utility (from `app/globals.css`)
 A utility class for balanced text wrapping:
-```css
+\`\`\`css
 /* app/globals.css */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
-```
+\`\`\`
 
 ### Border Radius (from `tailwind.config.ts`)
 Border radius values are mapped to the `--radius` CSS variable:
-```javascript
+\`\`\`javascript
 // tailwind.config.ts
 borderRadius: {
   lg: "var(--radius)",        // 0.5rem
   md: "calc(var(--radius) - 2px)", // 0.5rem - 2px
   sm: "calc(var(--radius) - 4px)", // 0.5rem - 4px
 },
-```
+\`\`\`
 
 ## Best Practices
 

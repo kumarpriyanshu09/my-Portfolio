@@ -15,7 +15,7 @@ This document provides a high-level overview of the portfolio application's arch
 
 ## Project Structure
 
-```
+\`\`\`
 heyitspriyanshu/
 ├── app/                             # App Router: Pages, layouts, and global styles
 │   ├── globals.css                  # Global stylesheets
@@ -83,11 +83,11 @@ heyitspriyanshu/
 ├── README.md
 ├── tailwind.config.ts               # Tailwind CSS configuration
 └── tsconfig.json                    # TypeScript configuration
-```
+\`\`\`
 
 ## Architecture Diagram
 
-```mermaid
+\`\`\`mermaid
 graph TD
     A[Pages] -->|Compose| B[Components]
     B -->|Use| C[Hooks]
@@ -96,7 +96,7 @@ graph TD
     B -->|Style with| E[Tailwind CSS]
     A -->|API Routes| F[External Services]
     G[Public Assets] -->|Serve| B
-```
+\`\`\`
 
 ## Design Decisions
 

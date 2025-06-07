@@ -62,7 +62,7 @@ The result? That floating, breathing animation you see in my "Who Am I" section.
 
 Let me show you what this vibe coding approach actually produced. Here's a glimpse into the heart of the portfolio:
 
-```css
+\`\`\`css
 .text-scramble__content {
   font-size: 15vw;
   font-weight: 600;
@@ -79,7 +79,7 @@ Let me show you what this vibe coding approach actually produced. Here's a glimp
   color: transparent;
   /* Words that literally glow with personality */
 }
-```
+\`\`\`
 
 Notice how even the CSS comments reflect the vibe coding approach? This isn't just functional code—it's code with intention, personality, and story.
 

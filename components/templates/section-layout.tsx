@@ -50,4 +50,4 @@ export const SectionLayout = forwardRef<SectionElement, SectionLayoutProps>(
   }
 )
 
-SectionLayout.displayName = "SectionLayout" 
+SectionLayout.displayName = "SectionLayout"

@@ -24,7 +24,7 @@ A modern, responsive, and interactive portfolio website built with Next.js, Type
 
 ## 📁 Project Structure
 
-```
+\`\`\`
 heyitspriyanshu/
 ├── app/                    # App Router pages and layouts
 ├── components/             # Reusable UI components
@@ -38,7 +38,7 @@ heyitspriyanshu/
 ├── lib/                   # Utility functions
 ├── public/                # Static assets
 └── styles/                # Global styles and themes
-```
+\`\`\`
 
 ## 🚀 Getting Started
 
@@ -50,29 +50,29 @@ heyitspriyanshu/
 ### Installation
 
 1. Clone the repository:
-   ```bash
+   \`\`\`bash
    git clone https://github.com/kumarpriyanshu09/heyitspriyanshu.git
-   ```
+   \`\`\`
 
 2. Install dependencies using pnpm (recommended):
-   ```bash
+   \`\`\`bash
    pnpm install
-   ```
+   \`\`\`
    
    Or using npm:
-   ```bash
+   \`\`\`bash
    npm install
-   ```
+   \`\`\`
 
 3. Start the development server:
-   ```bash
+   \`\`\`bash
    pnpm dev
-   ```
+   \`\`\`
    
    Or using npm:
-   ```bash
+   \`\`\`bash
    npm run dev
-   ```
+   \`\`\`
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
@@ -100,9 +100,9 @@ This project uses Tailwind CSS for styling. The theme configuration can be found
 
 This project uses pnpm as the primary package manager. The `pnpm-lock.yaml` file ensures consistent dependency versions across installations. If you prefer to use pnpm (recommended), you can install it using:
 
-```bash
+\`\`\`bash
 npm install -g pnpm
-```
+\`\`\`
 
 ### Adding New Components
 

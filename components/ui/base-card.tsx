@@ -30,4 +30,4 @@ export function BaseCard({ children, className, ...props }: BaseCardProps) {
       {children}
     </motion.div>
   );
-} 
+}

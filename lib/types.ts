@@ -50,4 +50,4 @@ export interface ContactLink {
   description: string
   href: string
   icon: React.ReactNode
-} 
+}

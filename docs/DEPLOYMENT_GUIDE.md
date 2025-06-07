@@ -24,7 +24,7 @@ This guide provides instructions for deploying the portfolio application to vari
 
 Create a `.env.local` file in the root directory with the following variables:
 
-```env
+\`\`\`env
 # Analytics
 NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 NEXT_PUBLIC_FACEBOOK_PIXEL_ID=XXXXXXXXXX
@@ -35,33 +35,33 @@ NEXT_PUBLIC_FORMSPREE_FORM_ID=your-form-id
 # Optional: API Keys
 NEXT_PUBLIC_GITHUB_TOKEN=your-github-token
 NEXT_PUBLIC_LINKEDIN_TOKEN=your-linkedin-token
-```
+\`\`\`
 
 ## Local Development
 
 1. Clone the repository:
-   ```bash
+   \`\`\`bash
    git clone https://github.com/kumarpriyanshu09/heyitspriyanshu.git
    cd heyitspriyanshu
-   ```
+   \`\`\`
 
 2. Install dependencies:
-   ```bash
+   \`\`\`bash
    npm install
    # or
    yarn install
    # or
    pnpm install
-   ```
+   \`\`\`
 
 3. Start the development server:
-   ```bash
+   \`\`\`bash
    npm run dev
    # or
    yarn dev
    # or
    pnpm dev
-   ```
+   \`\`\`
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
@@ -87,14 +87,14 @@ NEXT_PUBLIC_LINKEDIN_TOKEN=your-linkedin-token
 ### Manual Deployment
 
 1. Install Vercel CLI:
-   ```bash
+   \`\`\`bash
    npm install -g vercel
-   ```
+   \`\`\`
 
 2. Run the following command and follow the prompts:
-   ```bash
+   \`\`\`bash
    vercel
-   ```
+   \`\`\`
 
 ## Netlify Deployment
 
@@ -113,30 +113,30 @@ NEXT_PUBLIC_LINKEDIN_TOKEN=your-linkedin-token
 ### Manual Deployment
 
 1. Build the project:
-   ```bash
+   \`\`\`bash
    npm run build
    # or
    yarn build
    # or
    pnpm build
-   ```
+   \`\`\`
 
 2. Install Netlify CLI:
-   ```bash
+   \`\`\`bash
    npm install -g netlify-cli
-   ```
+   \`\`\`
 
 3. Deploy:
-   ```bash
+   \`\`\`bash
    netlify deploy --prod
-   ```
+   \`\`\`
 
 ## Static Export
 
 To generate a static version of your site (e.g., for hosting on platforms that only serve static files):
 
 1.  **Important**: The current `next.config.mjs` does **not** have `output: 'export'` configured. To enable static export, you would need to modify `next.config.mjs`:
-    ```javascript
+    \`\`\`javascript
     // next.config.mjs
     /** @type {import('next').NextConfig} */
     const nextConfig = {
@@ -149,17 +149,17 @@ To generate a static version of your site (e.g., for hosting on platforms that o
       // ... other configurations
     };
     export default nextConfig;
-    ```
+    \`\`\`
     *Note: Enabling static export may disable or change the behavior of certain Next.js features like API routes or dynamic rendering strategies.*
 
 2.  Build and export the static site:
-    ```bash
+    \`\`\`bash
     npm run build && npx next export
     # or
     yarn build && yarn next export
     # or
     pnpm build && pnpm next export
-    ```
+    \`\`\`
     This will generate the static files in the `out` directory by default.
 
 ## Environment Configuration
@@ -194,10 +194,10 @@ To generate a static version of your site (e.g., for hosting on platforms that o
    - Use `.nvmrc` or `engines` in `package.json` to specify the Node.js version
 
 2. **Missing Dependencies**
-   ```bash
+   \`\`\`bash
    rm -rf node_modules package-lock.json yarn.lock pnpm-lock.yaml
    npm install # or yarn install or pnpm install
-   ```
+   \`\`\`
 
 3. **Environment Variables**
    - Ensure all required environment variables are set
@@ -222,10 +222,10 @@ To generate a static version of your site (e.g., for hosting on platforms that o
    - Reinstall dependencies
 
 2. **Build Memory Issues**
-   ```bash
+   \`\`\`bash
    export NODE_OPTIONS=--max_old_space_size=4096
    npm run build
-   ```
+   \`\`\`
 
 3. **Deployment Hanging**
    - Check build logs for errors

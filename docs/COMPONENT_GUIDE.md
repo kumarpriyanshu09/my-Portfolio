@@ -29,7 +29,7 @@ The project organizes components with a methodology similar to Atomic Design, bu
 
 ### AppLayout
 
-```tsx
+\`\`\`tsx
 interface AppLayoutProps {
   children: ReactNode;
   className?: string;
@@ -37,11 +37,11 @@ interface AppLayoutProps {
   spotlightPosition?: string;
   footerContent?: ReactNode;
 }
-```
+\`\`\`
 
 ### ProjectCard
 
-```tsx
+\`\`\`tsx
 interface ProjectCardProps {
   title: string;
   description: string;
@@ -51,11 +51,11 @@ interface ProjectCardProps {
   liveUrl?: string;
   className?: string;
 }
-```
+\`\`\`
 
 ### CertificateCard
 
-```tsx
+\`\`\`tsx
 interface CertificateCardProps {
   title: string;
   issuer: string;
@@ -64,7 +64,7 @@ interface CertificateCardProps {
   image: string;
   className?: string;
 }
-```
+\`\`\`
 
 ## Best Practices
 
@@ -90,7 +90,7 @@ interface CertificateCardProps {
 
 Example:
 
-```tsx
+\`\`\`tsx
 /**
  * Button component for user interactions
  */
@@ -130,4 +130,4 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant
   size?: ButtonSize
 }
-```
+\`\`\`
