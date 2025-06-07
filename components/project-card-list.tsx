@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { ArrowRight, ExternalLink, Folder } from "lucide-react"
+import { ArrowRight, ExternalLink, Folder, ChevronDown, ChevronUp } from "lucide-react"
+import { useState } from "react"
 import type { Project } from "@/lib/types"
 
 interface ProjectCardListProps extends Project {
@@ -10,9 +11,15 @@ interface ProjectCardListProps extends Project {
 }
 
 export function ProjectCardList({ title, description, technologies, href, callToAction, index }: ProjectCardListProps) {
+  const [isExpanded, setIsExpanded] = useState(false)
   const isExternal = href?.startsWith("http")
-  const displayTechs = technologies.slice(0, 4)
-  const remainingCount = technologies.length - 4
+
+  // For collapsed state: show only first 3 technologies
+  const visibleTechs = technologies.slice(0, 3)
+  const remainingCount = technologies.length - 3
+
+  // Truncate description to 2 lines (approximately 100 characters)
+  const truncatedDescription = description.length > 100 ? description.substring(0, 100) + "..." : description
 
   return (
     <motion.div
@@ -26,6 +33,7 @@ export function ProjectCardList({ title, description, technologies, href, callTo
         ease: "easeOut",
       }}
       whileTap={{ scale: 0.98 }}
+      animate={{ height: "auto" }}
     >
       <div className="flex items-start p-4">
         {/* Project Icon */}
@@ -35,12 +43,17 @@ export function ProjectCardList({ title, description, technologies, href, callTo
 
         {/* Content */}
         <div className="flex-1 min-w-0">
-          <h3 className="text-base font-bold text-gray-200 leading-tight mb-2 line-clamp-2">{title}</h3>
-          <p className="text-sm text-gray-400 mb-3 line-clamp-2 leading-relaxed">{description}</p>
+          {/* Title */}
+          <h3 className="text-base font-bold text-gray-200 leading-tight mb-2 line-clamp-1">{title}</h3>
+
+          {/* Description */}
+          <p className="text-sm text-gray-400 mb-3 leading-relaxed">
+            {isExpanded ? description : truncatedDescription}
+          </p>
 
           {/* Technologies */}
           <div className="flex flex-wrap gap-1.5 mb-3">
-            {displayTechs.map((tech, techIndex) => (
+            {(isExpanded ? technologies : visibleTechs).map((tech, techIndex) => (
               <span
                 key={techIndex}
                 className="text-xs px-2 py-1 rounded-md bg-gray-800/50 text-gray-400 border border-gray-700/50"
@@ -48,29 +61,41 @@ export function ProjectCardList({ title, description, technologies, href, callTo
                 {tech}
               </span>
             ))}
-            {remainingCount > 0 && (
+            {!isExpanded && remainingCount > 0 && (
               <span className="text-xs px-2 py-1 rounded-md bg-gray-800/50 text-gray-400 border border-gray-700/50">
-                +{remainingCount}
+                +{remainingCount} more
               </span>
             )}
           </div>
 
-          {/* Action Link */}
-          {href && callToAction && (
-            <Link
-              href={href}
-              target={isExternal ? "_blank" : undefined}
-              rel={isExternal ? "noopener noreferrer" : undefined}
-              className="inline-flex items-center text-sm text-pink-400 hover:text-pink-300 transition-colors group-hover:text-pink-300"
+          {/* Action Buttons */}
+          <div className="flex items-center justify-between">
+            {/* Main Action Link */}
+            {href && callToAction && (
+              <Link
+                href={href}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noopener noreferrer" : undefined}
+                className="inline-flex items-center text-sm text-pink-400 hover:text-pink-300 transition-colors group-hover:text-pink-300"
+              >
+                <span className="truncate">{callToAction}</span>
+                {isExternal ? (
+                  <ExternalLink className="ml-2 h-4 w-4 flex-shrink-0" />
+                ) : (
+                  <ArrowRight className="ml-2 h-4 w-4 flex-shrink-0" />
+                )}
+              </Link>
+            )}
+
+            {/* Expand/Collapse Button */}
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="inline-flex items-center text-sm text-gray-500 hover:text-gray-300 transition-colors ml-4"
             >
-              <span className="truncate">{callToAction}</span>
-              {isExternal ? (
-                <ExternalLink className="ml-2 h-4 w-4 flex-shrink-0" />
-              ) : (
-                <ArrowRight className="ml-2 h-4 w-4 flex-shrink-0" />
-              )}
-            </Link>
-          )}
+              <span>{isExpanded ? "Less" : "More"}</span>
+              {isExpanded ? <ChevronUp className="ml-1 h-4 w-4" /> : <ChevronDown className="ml-1 h-4 w-4" />}
+            </button>
+          </div>
         </div>
       </div>
 
