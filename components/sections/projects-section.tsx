@@ -4,7 +4,7 @@ import Link from "next/link"
 import { Github, ExternalLink } from "lucide-react"
 import { AnimatedText } from "@/components/animated-text"
 import { ProjectCard } from "@/components/project-card"
-import { ProjectCardMobile } from "@/components/project-card-mobile"
+import { ProjectCardList } from "@/components/project-card-list"
 import type { Project } from "@/lib/types"
 import { SectionLayout } from "@/components/templates/section-layout"
 
@@ -101,11 +101,11 @@ export function ProjectsSection() {
         </div>
       </div>
 
-      {/* Mobile Grid Layout */}
+      {/* Mobile 4x1 List Layout */}
       <div className="block md:hidden">
-        <div className="grid grid-cols-2 gap-3">
+        <div className="space-y-0">
           {projects.map((project, index) => (
-            <ProjectCardMobile key={project.title} {...project} index={index} />
+            <ProjectCardList key={project.title} {...project} index={index} />
           ))}
         </div>
       </div>
