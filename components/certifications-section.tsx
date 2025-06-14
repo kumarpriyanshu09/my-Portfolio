@@ -21,7 +21,7 @@ export function CertificationsSection() {
     {
       name: "Get Started with Databricks for Generative AI",
       organization: "Databricks Academy",
-      badgeImage: "/assets/skills/Databricks-Logo.png",
+      badgeImage: "assets/skills/Databricks_id5WLjUbLd_0.svg",
       pdfLink:
         "https://7qd5tdgxs26x480g.public.blob.vercel-storage.com/Certifications/Databricks%20Generative-AI-vVh2ICy2ofQ8lttUFGQkzx2V97paGs.pdf",
     },
