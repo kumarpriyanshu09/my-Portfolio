@@ -25,6 +25,12 @@ export function CertificationsSection() {
       pdfLink:
         "https://7qd5tdgxs26x480g.public.blob.vercel-storage.com/Certifications/Databricks%20Generative-AI-vVh2ICy2ofQ8lttUFGQkzx2V97paGs.pdf",
     },
+    {
+      name: "Building Ambient Agents with LangGraph",
+      organization: "Langchain",
+      badgeImage: "/assets/skills/Langchain--Streamline-Simple-Icons.svg",
+      pdfLink: "https://academy.langchain.com/certificates/xp6rjydtb9",
+    },
   ]
 
   return (
