@@ -13,7 +13,7 @@ export function ExperienceSection() {
       {/* Mobile-First Timeline */}
       <div className="space-y-4 sm:space-y-6">
         <TimelineItem
-          date="July 2022 - July 2025"
+          date="July 2024 - July 2025"
           title="Gen AI Engineer"
           company="Ananda"
           description="Built a Vicuna-based RAG system that improved clarity by 20% and reduced latency by 15%."
