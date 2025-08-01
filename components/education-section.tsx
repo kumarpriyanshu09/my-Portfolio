@@ -18,7 +18,7 @@ export function EducationSection() {
           field="Business Analytics and Project Management"
           date="August 2023 - May 2025"
           location="Hartford, CT"
-          gpa="3.76/4.0"
+          gpa="3.78/4.0"
           logo="/assets/education/UConn Logo.svg"
           courses={[
             "Data Mining and Business Intelligence",

@@ -9,7 +9,7 @@ export function useScrollTop() {
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: "instant", // Using "instant" instead of "smooth" for initial load
+      behavior: "instant" as ScrollBehavior, // Using "instant" instead of "smooth" for initial load
     })
   }, [pathname])
 }

@@ -13,7 +13,7 @@ export function ExperienceSection() {
       {/* Mobile-First Timeline */}
       <div className="space-y-4 sm:space-y-6">
         <TimelineItem
-          date="Aug 2024 - May 2025"
+          date="July 2022 - July 2025"
           title="Gen AI Engineer"
           company="Ananda"
           description="Built a Vicuna-based RAG system that improved clarity by 20% and reduced latency by 15%."
@@ -23,20 +23,14 @@ export function ExperienceSection() {
               <span className="font-bold text-white">15%</span> latency
             </>
           }
-          leadership="Led a 3-member ML pod; served as finance liaison."
-          achievements={[
-            "Constructed Vicuna-based RAG pipelines and integrated ChromaDB for vector search, cutting retrieval time by 15%",
-            "Enhanced document embedding to raise answer clarity by 20%",
-            "Built an evaluation harness with BERT and ROUGE to monitor semantic relevance",
-            "Led data-driven team analysis on crypto-strategy datasets, surfacing insights for risk mitigation",
-          ]}
-          skills={["Python", "Vicuna-7B", "LangChain", "ChromaDB", "BERT", "RAG", "Docker"]}
+          leadership="Led a 7-member ML pod; served as finance liaison."
+          skills={["Python", "Vicuna-7B", "LangChain","Pinecone", "langsmith", "ChromaDB", "BERT", "RAG", "Docker"]}
         />
 
         <TimelineItem
-          date="Jun 2022 - Jul 2023"
+          date="November 2021 - July 2023"
           title="Data Analyst"
-          company="REINO PREFAB PRIVATE LTD."
+          company="Reino Prefab Private Ltd."
           description="Revamped the company's SQL data-collection system, doubling data accuracy (↑ 100%) and cutting weekly preprocessing time by 10 hours."
           metrics={
             <>
@@ -46,17 +40,11 @@ export function ExperienceSection() {
             </>
           }
           leadership="Conducted exec-level insight briefings; aligned ops & marketing on data-driven decisions."
-          achievements={[
-            "Revamped SQL pipelines and validation rules, boosting data accuracy by 100%",
-            "Applied R statistical techniques to optimise operations and guide strategic decisions",
-            "Built Power BI dashboards that surfaced KPIs for marketing & leadership teams",
-            "Refined data-collection protocols, lowering entry errors 15% and saving 10 h/week in preprocessing",
-          ]}
-          skills={["SQL", "R", "Power BI", "Excel", "ETL / Data Validation"]}
+          skills={["SQL", "R", "Tableau", "Excel", "ETL / Data Validation"]}
         />
 
         <TimelineItem
-          date="Aug 2021 - Nov 2021"
+          date="May 2021 - August 2021"
           title="Data Analyst Intern"
           company="Inator"
           description="Built a Python player-ranking algorithm that boosted model precision by 70% and a Flask web interface that increased user engagement by 25%."
@@ -67,11 +55,6 @@ export function ExperienceSection() {
               <span className="font-bold text-white">–60%</span>
             </>
           }
-          achievements={[
-            "Implemented Python-based player-ranking algorithm, raising precision 70%",
-            "Developed Flask interface with K-means clustering, lifting engagement 25%",
-            "Streamlined SQL processes, cutting data errors 60% and improving downstream reliability",
-          ]}
           skills={["Python", "Flask", "SQL", "Pandas", "scikit-learn", "K-means"]}
         />
       </div>

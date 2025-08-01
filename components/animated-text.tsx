@@ -11,7 +11,7 @@ interface AnimatedTextProps {
 export function AnimatedText({ text, className }: AnimatedTextProps) {
   const controls = useAnimation()
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, threshold: 0.1 })
+  const isInView = useInView(ref, { once: true, amount: 0.1 })
 
   useEffect(() => {
     if (isInView) {
@@ -34,7 +34,7 @@ export function AnimatedText({ text, className }: AnimatedTextProps) {
       opacity: 0,
       y: 20,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         damping: 12,
         stiffness: 100,
       },
@@ -43,7 +43,7 @@ export function AnimatedText({ text, className }: AnimatedTextProps) {
       opacity: 1,
       y: 0,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         damping: 12,
         stiffness: 100,
       },
