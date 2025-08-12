@@ -171,6 +171,7 @@ export function ProjectsSection() {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-pink-400 hover:text-pink-300 transition-colors mt-4 md:mt-0 text-base md:text-lg"
+            aria-label="View all projects on GitHub (opens in new tab)"
           >
             <Github className="h-5 w-5" />
             <span>View All on GitHub</span>
