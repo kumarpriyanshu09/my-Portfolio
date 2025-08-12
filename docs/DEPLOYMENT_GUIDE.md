@@ -32,9 +32,9 @@ NEXT_PUBLIC_FACEBOOK_PIXEL_ID=XXXXXXXXXX
 # Contact Form
 NEXT_PUBLIC_FORMSPREE_FORM_ID=your-form-id
 
-# Optional: API Keys
-NEXT_PUBLIC_GITHUB_TOKEN=your-github-token
-NEXT_PUBLIC_LINKEDIN_TOKEN=your-linkedin-token
+# Optional: API Keys (use server-side environment variables for sensitive tokens)
+# GITHUB_API_TOKEN=your-github-token (server-side only)
+# LINKEDIN_API_TOKEN=your-linkedin-token (server-side only)
 \`\`\`
 
 ## Local Development
@@ -242,6 +242,7 @@ To generate a static version of your site (e.g., for hosting on platforms that o
 1. **Environment Variables**
    - Never commit sensitive data to version control
    - Use platform secrets for production
+   - Keep sensitive API tokens server-side only (without NEXT_PUBLIC_ prefix)
 
 2. **Dependencies**
    - Regularly update dependencies
