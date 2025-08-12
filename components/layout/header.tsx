@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils"
 import { useState, useEffect } from "react"
 import { MainNavigation } from "@/components/organisms/main-navigation"
+import { NavLink } from "@/components/atoms/nav-link"
 
 interface HeaderProps {
   className?: string
@@ -31,6 +32,9 @@ export function Header({ className }: HeaderProps) {
         className,
       )}
     >
+      <NavLink href="/" className="text-gray-200 font-bold text-xl">
+        Priyanshu Kumar
+      </NavLink>
       <MainNavigation />
     </header>
   )
