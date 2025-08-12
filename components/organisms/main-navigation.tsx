@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { cn } from "@/lib/utils"
+import { useState, useEffect, useCallback } from "react"
 import { Menu, X } from "lucide-react"
 import { NavLink } from "@/components/atoms/nav-link"
 import ReactDOM from "react-dom"
+import { debounce } from "@/lib/utils"
 
 const navItems = [
   { href: "#about", label: "About" },
@@ -24,26 +24,28 @@ export function MainNavigation() {
   // Handle body scroll lock when menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = "hidden"
     } else {
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = "unset"
     }
+
+    // Cleanup function to ensure body overflow is reset
     return () => {
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = "unset"
     }
   }, [mobileMenuOpen])
 
-  // Handle scrolling for header styling
-  useEffect(() => {
-    const handleScroll = () => {
+  // Debounced scroll handler for better performance
+  const debouncedHandleScroll = useCallback(
+    debounce(() => {
       const isScrolled = window.scrollY > 10
       if (isScrolled !== scrolled) {
         setScrolled(isScrolled)
       }
 
       // Determine active section based on scroll position
-      const sections = navItems.map(item => item.href.slice(1))
-      
+      const sections = navItems.map((item) => item.href.slice(1))
+
       let currentSection = ""
       for (const section of sections) {
         const element = document.getElementById(section)
@@ -54,35 +56,53 @@ export function MainNavigation() {
           }
         }
       }
-      
-      setActiveSection(currentSection)
+
+      if (currentSection !== activeSection) {
+        setActiveSection(currentSection)
+      }
+    }, 100), // Debounce by 100ms
+    [scrolled, activeSection],
+  )
+
+  // Handle scrolling for header styling
+  useEffect(() => {
+    window.addEventListener("scroll", debouncedHandleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", debouncedHandleScroll)
+  }, [debouncedHandleScroll])
+
+  // Close mobile menu on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && mobileMenuOpen) {
+        setMobileMenuOpen(false)
+      }
     }
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [scrolled])
+    if (mobileMenuOpen) {
+      document.addEventListener("keydown", handleEscape)
+      return () => document.removeEventListener("keydown", handleEscape)
+    }
+  }, [mobileMenuOpen])
 
   return (
     <>
       <div className="w-full max-w-7xl flex justify-between items-center">
-        <NavLink href="/" className="text-gray-200 font-bold text-xl">PK</NavLink>
-        
+        <NavLink href="/" className="text-gray-200 font-bold text-xl">
+          PK
+        </NavLink>
+
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-8 text-sm">
           {navItems.map((item) => (
-            <NavLink 
-              key={item.href}
-              href={item.href}
-              isActive={activeSection === item.href.slice(1)}
-            >
+            <NavLink key={item.href} href={item.href} isActive={activeSection === item.href.slice(1)}>
               {item.label}
             </NavLink>
           ))}
         </nav>
 
         {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden text-gray-300 hover:text-white"
+        <button
+          className="md:hidden text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 rounded-md p-1"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileMenuOpen}
@@ -92,56 +112,63 @@ export function MainNavigation() {
       </div>
 
       {/* Mobile Navigation Overlay */}
-      {mobileMenuOpen && typeof window !== "undefined" && ReactDOM.createPortal(
-        <div 
-          className="fixed inset-0 z-[9999] md:hidden"
-          style={{ 
-            position: 'fixed', 
-            top: 0, 
-            right: 0, 
-            bottom: 0, 
-            left: 0, 
-            backgroundColor: 'rgb(0, 0, 0)', // Pure black
-            opacity: 1, // Force full opacity
-            transform: 'translateZ(0)' // Promote to own compositing layer
-          }}
-        >
-          {/* Header */}
-          <div 
-            className="sticky top-0 flex justify-between items-center p-6 border-b border-gray-800"
-            style={{ 
-              backgroundColor: 'rgb(0, 0, 0)', // Pure black for header
-              opacity: 1, // Force full opacity for header
-              transform: 'translateZ(0)' // Promote to own compositing layer
-            }} 
+      {mobileMenuOpen &&
+        typeof window !== "undefined" &&
+        ReactDOM.createPortal(
+          <div
+            className="fixed inset-0 z-[9999] md:hidden"
+            style={{
+              position: "fixed",
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0,
+              backgroundColor: "rgb(0, 0, 0)",
+              opacity: 1,
+              transform: "translateZ(0)",
+            }}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="mobile-menu-title"
           >
-            <NavLink href="/" className="text-gray-200 font-bold text-xl">PK</NavLink>
-            <button
-              onClick={() => setMobileMenuOpen(false)}
-              aria-label="Close menu"
-              className="text-gray-400 hover:text-white transition-colors"
+            {/* Header */}
+            <div
+              className="sticky top-0 flex justify-between items-center p-6 border-b border-gray-800"
+              style={{
+                backgroundColor: "rgb(0, 0, 0)",
+                opacity: 1,
+                transform: "translateZ(0)",
+              }}
             >
-              <X size={24} />
-            </button>
-          </div>
-
-          {/* Navigation Links */}
-          <nav className="flex flex-col px-6 py-8">
-            {navItems.map((item) => (
-              <NavLink
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                isActive={activeSection === item.href.slice(1)}
-                className="text-[32px] font-medium text-gray-300 hover:text-white py-3 transition-colors"
-              >
-                {item.label}
+              <NavLink href="/" className="text-gray-200 font-bold text-xl" id="mobile-menu-title">
+                PK
               </NavLink>
-            ))}
-          </nav>
-        </div>,
-        document.body
-      )}
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Close menu"
+                className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 rounded-md p-1"
+              >
+                <X size={24} />
+              </button>
+            </div>
+
+            {/* Navigation Links */}
+            <nav className="flex flex-col px-6 py-8" role="navigation">
+              {navItems.map((item) => (
+                <NavLink
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  isActive={activeSection === item.href.slice(1)}
+                  className="text-[32px] font-medium text-gray-300 hover:text-white py-3 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 rounded-md"
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+            </nav>
+          </div>,
+          document.body,
+        )}
     </>
   )
 }
