@@ -1,19 +1,37 @@
 "use client"
 
-import Link from "next/link"
+import { cn } from "@/lib/utils"
+import { useState, useEffect } from "react"
 import { MainNavigation } from "@/components/organisms/main-navigation"
 
-export function Header() {
+interface HeaderProps {
+  className?: string
+}
+
+export function Header({ className }: HeaderProps) {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [scrolled])
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-800/50 bg-black/80 backdrop-blur-sm">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <span className="text-xl font-bold text-gray-200">Priyanshu Kumar</span>
-          </Link>
-          <MainNavigation />
-        </div>
-      </div>
+    <header 
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 flex justify-center items-center p-4 md:p-6 bg-black/80 backdrop-blur-sm transition-all duration-300",
+        scrolled && "shadow-md shadow-pink-500/5 bg-black/90",
+        className
+      )}
+    >
+      <MainNavigation />
     </header>
   )
 }
