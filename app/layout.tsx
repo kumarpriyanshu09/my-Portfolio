@@ -5,14 +5,15 @@ import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/lib/contexts/theme-context"
 import { ErrorBoundary } from "@/components/error-boundary"
 import { Analytics } from "@vercel/analytics/next"
+import { Suspense } from "react"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "Priyanshu Kumar | Portfolio",
   description: "Personal portfolio of Priyanshu Kumar, a design-minded developer",
-    generator: 'v0.dev',
-  icons: '/assets/ui/favicon.png',
+  generator: "v0.dev",
+  icons: "/assets/ui/favicon.png",
 }
 
 export default function RootLayout({
@@ -25,7 +26,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider>
           <ErrorBoundary>
-            {children}
+            <Suspense fallback={<div className="min-h-screen bg-black" />}>{children}</Suspense>
             <Analytics />
           </ErrorBoundary>
         </ThemeProvider>
