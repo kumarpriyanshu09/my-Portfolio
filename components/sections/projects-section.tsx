@@ -49,6 +49,45 @@ export const projects: Project[] = [
     callToAction: "View on Streamlit",
   },
   {
+    title: "FINE-TUNING GEMMA 3 4B WITH UNSLOTH",
+    description:
+      "Fine-tuning Google's Gemma 3 4B with Unsloth for faster, memory‑efficient training. Includes setup, LoRA/QLoRA configs, dataset preprocessing, training scripts, and evaluation to reproduce and adapt lightweight, cost‑effective LLM fine-tuning.",
+    technologies: [
+      "LLM",
+      "FINE-TUNING",
+      "LORA",
+      "QLORA",
+      "4-BIT QUANTIZATION",
+      "PARAMETER-EFFICIENT FINE-TUNING (PEFT)",
+      "SFT (SUPERVISED FINE-TUNING)",
+      "RESPONSE MASKING",
+      "CHAT TEMPLATING",
+      "GGUF EXPORT",
+      "GEMMA-3 4B",
+    ],
+    href: "https://github.com/kumarpriyanshu09/Gemma-3-4B-Fine-tuning-with-Unsloth",
+    callToAction: "View on GitHub",
+  },
+  {
+    title: "RAG WITH PINECONE",
+    description:
+      "Build a Retrieval-Augmented Generation (RAG) pipeline that answers questions from YouTube videos using Pinecone, LangChain, Whisper, and OpenAI. The Colab-ready notebook downloads audio, transcribes with Whisper, chunks and embeds text, stores vectors in Pinecone, and retrieves relevant context for LLM-powered QA. Includes workflow diagram, setup steps, and example queries.",
+    technologies: [
+      "RETRIEVAL-AUGMENTED GENERATION (RAG)",
+      "PINECONE",
+      "LANGCHAIN",
+      "WHISPER",
+      "OPENAI EMBEDDINGS",
+      "YOUTUBE TRANSCRIPTION",
+      "VECTOR DATABASE",
+      "SEMANTIC CHUNKING",
+      "COLAB NOTEBOOK",
+      "INSTRUCTION TUNING",
+    ],
+    href: "https://github.com/kumarpriyanshu09/RAG-with-Pinecone",
+    callToAction: "View on GitHub",
+  },
+  {
     title: "FROM BLANK CANVAS TO DIGITAL MASTERPIECE",
     description:
       "The story of vibe coding, AI collaboration, and why the future of development is more creative than you think. A deep dive into building a personal portfolio using modern AI tools.",
