@@ -1,0 +1,80 @@
+---
+trigger: always_on
+description: 
+globs: 
+---
+# Style and Language Preferences
+
+This document outlines the established styling and language conventions for the project, derived from [tailwind.config.ts](mdc:tailwind.config.ts), [tsconfig.json](mdc:tsconfig.json), and [styles/globals.css](mdc:styles/globals.css).
+
+## Tailwind CSS Conventions
+
+Reference: [tailwind.config.ts](mdc:tailwind.config.ts)
+
+*   **Dark Mode:** Enabled using the `class` strategy. Apply the `.dark` class to an ancestor element (typically `<html>` or `<body>`) to activate dark mode styles.
+*   **Content Scanning:** Tailwind processes files in the following locations:
+    *   `./pages/**/*.{ts,tsx}`
+    *   `./components/**/*.{ts,tsx}`
+    *   `./app/**/*.{ts,tsx}`
+    *   `./src/**/*.{ts,tsx}`
+    *   `*.{js,ts,jsx,tsx,mdx}` (in the root)
+*   **Class Prefix:** No prefix is used for Tailwind utility classes (e.g., `text-red-500` not `tw-text-red-500`).
+*   **Theming:**
+    *   **Container:** Use the `container` class for centered content. It has `2rem` padding by default and a max-width of `1400px` on `2xl` screens.
+    *   **Colors:**
+        *   Colors are defined in `tailwind.config.ts` using HSL values referencing CSS variables from [styles/globals.css](mdc:styles/globals.css). Example: `primary: "hsl(var(--primary))"`.
+        *   Favor using semantic color names (e.g., `bg-primary`, `text-destructive-foreground`) over literal color values where appropriate.
+    *   **Border Radius:**
+        *   Uses CSS variables for consistency:
+            *   `rounded-lg` maps to `var(--radius)` (0.5rem).
+            *   `rounded-md` maps to `calc(var(--radius) - 2px)`.
+            *   `rounded-sm` maps to `calc(var(--radius) - 4px)`.
+*   **Animations:**
+    *   Custom animations `accordion-down` and `accordion-up` are available for use with Radix UI Accordion or similar components.
+*   **Plugins:**
+    *   `tailwindcss-animate` is used for adding enter/exit animations.
+
+## TypeScript Conventions
+
+Reference: [tsconfig.json](mdc:tsconfig.json)
+
+*   **ECMAScript Target:** Code is compiled to `ES6`.
+*   **Module System:** Uses `esnext` modules with `bundler` module resolution. Ensure ES module syntax (`import`/`export`).
+*   **Strict Mode:** All strict type-checking options are enabled (`"strict": true`). Write type-safe code.
+*   **JSX:** JSX syntax is preserved (`"jsx": "preserve"`), typically for Next.js/React.
+*   **Path Aliases:**
+    *   Use the `@/*` alias to refer to files/modules from the root directory (e.g., `import MyComponent from '@/components/MyComponent'`).
+*   **Type Declarations:** Project includes `next-env.d.ts` for Next.js specific types.
+*   **Key Compiler Options to Note:**
+    *   `"allowJs": true`: JavaScript files can be imported into TypeScript files.
+    *   `"esModuleInterop": true`: Enables smoother interoperability between CommonJS and ES modules.
+    *   `"resolveJsonModule": true`: Allows importing JSON files as modules.
+    *   `"isolatedModules": true`: Ensures each file can be transpiled as a single module.
+
+## CSS and Styling Conventions
+
+Reference: [styles/globals.css](mdc:styles/globals.css)
+
+*   **Base Imports:** Tailwind's `base`, `components`, and `utilities` layers are imported.
+*   **Default Font:** The default body font is `Arial, Helvetica, sans-serif`.
+*   **CSS Variables for Theming:**
+    *   A comprehensive set of CSS variables is defined in `:root` for light theme and overridden in `.dark` for dark theme. These variables cover:
+        *   `--background`, `--foreground`
+        *   `--card`, `--card-foreground`
+        *   `--popover`, `--popover-foreground`
+        *   `--primary`, `--primary-foreground`
+        *   `--secondary`, `--secondary-foreground`
+        *   `--muted`, `--muted-foreground`
+        *   `--accent`, `--accent-foreground`
+        *   `--destructive`, `--destructive-foreground`
+        *   `--border`, `--input`, `--ring`
+        *   `--chart-1` to `--chart-5`
+        *   `--radius` (0.5rem)
+    *   Sidebar-specific theme variables are also available (e.g., `--sidebar-background`, `--sidebar-primary`).
+    *   Prefer using these CSS variables directly in custom CSS or via Tailwind's `theme.extend.colors` for consistency.
+*   **Global Styles:**
+    *   All elements (`*`) have `border-border` applied by default.
+    *   The `<body>` element has `bg-background` and `text-foreground` applied.
+*   **Custom Utilities:**
+    *   A `.text-balance` utility class is available to improve text wrapping (`text-wrap: balance;`).
+*   **Layers:** Custom styles and utilities should be organized within appropriate Tailwind layers (`@layer base`, `@layer components`, `@layer utilities`) if extending or overriding Tailwind's defaults.
