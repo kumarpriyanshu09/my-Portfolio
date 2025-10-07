@@ -10,45 +10,29 @@ export function EducationSection() {
         <AnimatedText text="EDUCATION" />
       </h2>
 
-      {/* Mobile-First Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-        <EducationCard
-          institution="University of Connecticut"
-          degree="M.S"
-          field="Business Analytics and Project Management"
-          date="August 2023 - May 2025"
-          location="Hartford, CT"
-          gpa="3.78/4.0"
-          logo="/assets/education/UConn Logo.svg"
-          courses={[
-            "Data Mining and Business Intelligence",
-            "Predictive Modeling",
-            "Project Risk and Cost Management",
-            "Advanced Business Analytics",
-            "Statistics Business Analytics",
-            "Business Decision Modeling",
-            "Data Science using Python",
-            "Big Data Analytics with Cloud",
-            "Generative AI in Business",
-          ]}
-        />
-
-        <EducationCard
-          institution="Maharashtra Institute of Technology"
-          degree="Bachelor's"
-          field="Electrical Engineering"
-          date="August 2018 - May 2022"
-          location="Pune, India"
-          gpa="3.29/4.0"
-          logo="/assets/education/MIT WPU Logo.svg"
-          courses={[
-            "Data Analytics with Python",
-            "Machine Learning",
-            "Project Management",
-            "Optimization Techniques",
-            "Maths for Artificial Intelligence",
-          ]}
-        />
+      <div className="flex justify-center">
+        <div className="w-full max-w-2xl">
+          <EducationCard
+            institution="University of Connecticut"
+            degree="M.S"
+            field="Business Analytics and Project Management"
+            date="August 2023 - May 2025"
+            location="Hartford, CT"
+            gpa="3.78/4.0"
+            logo="/assets/education/uconn-husky-logo.jpeg"
+            courses={[
+              "Data Mining and Business Intelligence",
+              "Predictive Modeling",
+              "Project Risk and Cost Management",
+              "Advanced Business Analytics",
+              "Statistics Business Analytics",
+              "Business Decision Modeling",
+              "Data Science using Python",
+              "Big Data Analytics with Cloud",
+              "Generative AI in Business",
+            ]}
+          />
+        </div>
       </div>
     </section>
   )

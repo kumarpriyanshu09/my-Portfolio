@@ -13,49 +13,45 @@ export function ExperienceSection() {
       {/* Mobile-First Timeline */}
       <div className="space-y-4 sm:space-y-6">
         <TimelineItem
-          date="July 2024 - July 2025"
-          title="Gen AI Engineer"
-          company="Ananda"
-          description="Built a Vicuna-based RAG system that improved clarity by 20% and reduced latency by 15%."
+          date="Feb 2025 - Current"
+          title="AI ML Engineer"
+          company="BlackRock"
+          description="Built a production RAG platform (LangChain + Pinecone) that lifted retrieval accuracy 35% across a 10K+ queries/mo finance knowledge base."
           metrics={
             <>
-              ↑ <span className="font-bold text-white">20%</span> clarity · ↓{" "}
-              <span className="font-bold text-white">15%</span> latency
+              ↑ <span className="font-bold text-white">35%</span> document retrieval accuracy · ↑{" "}
+              <span className="font-bold text-white">30%</span> domain response quality
             </>
           }
-          leadership="Led a 7-member ML pod; served as finance liaison."
-          skills={["Python", "Vicuna-7B", "LangChain","Pinecone", "langsmith", "ChromaDB", "BERT", "RAG", "Docker"]}
+          skills={["LangChain", "RAG", "Pinecone", "AWS", "VectorDB", "LangGraph"]}
         />
 
         <TimelineItem
-          date="November 2021 - July 2023"
-          title="Data Analyst"
-          company="Reino Prefab Private Ltd."
-          description="Revamped the company's SQL data-collection system, doubling data accuracy (↑ 100%) and cutting weekly preprocessing time by 10 hours."
+          date="Sep 2024 - Jan 2025"
+          title="GenAI Engineer"
+          company="AIG"
+          description="Shipped GenAI claim & fraud stack—45% faster reviews on 120K+ claims and +19% fraud-recall on high-value policies."
           metrics={
             <>
-              ↑ <span className="font-bold text-white">100%</span> accuracy · ↓{" "}
-              <span className="font-bold text-white">15%</span> entry errors · –
-              <span className="font-bold text-white">10</span> h/week preprocessing
+              ↓ <span className="font-bold text-white">45%</span> faster claim reviews · ↑{" "}
+              <span className="font-bold text-white">19%</span> fraud detection recall
             </>
           }
-          leadership="Conducted exec-level insight briefings; aligned ops & marketing on data-driven decisions."
-          skills={["SQL", "R", "Tableau", "Excel", "ETL / Data Validation"]}
+          skills={["RAG", "Embedding", "AWS", "XGBoost", "OpenAI"]}
         />
 
         <TimelineItem
-          date="May 2021 - August 2021"
-          title="Data Analyst Intern"
-          company="Inator"
-          description="Built a Python player-ranking algorithm that boosted model precision by 70% and a Flask web interface that increased user engagement by 25%."
+          date="Mar 2020 - Jul 2023"
+          title="ML Engineer"
+          company="Space Infolab"
+          description="Built anomaly-detection pipelines hitting 91% recall, cutting false positives 27% and surfacing $5M+ in fraud."
           metrics={
             <>
-              Precision <span className="font-bold text-white">+70%</span> · Engagement{" "}
-              <span className="font-bold text-white">+25%</span> · Data errors{" "}
-              <span className="font-bold text-white">–60%</span>
+              <span className="font-bold text-white">91%</span> recall · ↑{" "}
+              <span className="font-bold text-white">23%</span> precision
             </>
           }
-          skills={["Python", "Flask", "SQL", "Pandas", "scikit-learn", "K-means"]}
+          skills={["Isolation Forest", "PyTorch", "AWS", "Python", "Autoencoders"]}
         />
       </div>
     </section>
