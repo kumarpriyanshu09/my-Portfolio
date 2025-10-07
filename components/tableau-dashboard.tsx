@@ -34,7 +34,7 @@ export function TableauDashboard() {
           <a href="#">
             <img
               alt="Story 1"
-              src="/images/design-mode/1_rss.png"
+              src="https://public.tableau.com/static/images/AI/AIsRiseandSocietalImpactDashboard/Story1/1_rss.png"
               style={{ border: "none" }}
             />
           </a>
