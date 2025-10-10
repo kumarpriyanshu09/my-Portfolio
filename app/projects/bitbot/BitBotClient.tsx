@@ -34,7 +34,7 @@ export default function BitBotClient() {
         <div className="max-w-3xl mx-auto my-8">
           <AspectRatio ratio={16 / 9} className="bg-gray-900 border border-gray-800 rounded-lg shadow">
             <Image
-              src="https://7qd5tdgxs26x480g.public.blob.vercel-storage.com/projects/Bitbot/Latest%20Crypto%20News-Tf5GLsyHcqSyX8oe7WauTVGK2E7zpc.png"
+              src="/images/design-mode/Latest%20Crypto%20News.png"
               alt="BitBot showing latest crypto news"
               fill
               className="object-contain rounded-lg"
@@ -165,7 +165,7 @@ export default function BitBotClient() {
         <div className="max-w-3xl mx-auto my-8">
           <AspectRatio ratio={16 / 9} className="bg-gray-900 border border-gray-800 rounded-lg shadow">
             <Image
-              src="https://7qd5tdgxs26x480g.public.blob.vercel-storage.com/projects/Bitbot/Latest%20Crypto%20News-Tf5GLsyHcqSyX8oe7WauTVGK2E7zpc.png"
+              src="/images/design-mode/Latest%20Crypto%20News.png"
               alt="BitBot workflow diagram"
               fill
               className="object-contain rounded-lg"

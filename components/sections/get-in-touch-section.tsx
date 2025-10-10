@@ -23,7 +23,7 @@ const CONTACTS = [
 export function GetInTouchSection() {
   const handleEmailClick = (e: React.MouseEvent) => {
     e.preventDefault()
-    window.open("mailto:kumarpriyanshu09@gmail.com?subject=Let's%20Connect", "_blank")
+    window.open("mailto:priyanshu.k@techsmail.com?subject=Let's%20Connect", "_blank")
   }
 
   return (
